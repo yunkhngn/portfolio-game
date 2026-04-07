@@ -131,6 +131,16 @@ export async function getProjects(): Promise<Project[]> {
   }
 }
 
+export async function getProjectBySlug(slug: string): Promise<Project | null> {
+  const projects = await getProjects();
+  return projects.find((p) => p.slug === slug) || null;
+}
+
+export async function getProjectSlugs(): Promise<string[]> {
+  const projects = await getProjects();
+  return projects.map((p) => p.slug);
+}
+
 export async function getServices(): Promise<Service[]> {
   if (!client) return mockServices;
   try {
