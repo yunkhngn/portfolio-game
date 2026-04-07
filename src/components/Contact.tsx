@@ -10,7 +10,7 @@ export default function Contact({ config }: { config: SiteConfig }) {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section id="contact" className="py-24 px-6 bg-primary text-surface">
+    <section id="contact" className="snap-section py-24 px-6 bg-primary text-surface flex items-center">
       <div className="max-w-4xl mx-auto">
         <SectionHeader
           label="Contact"

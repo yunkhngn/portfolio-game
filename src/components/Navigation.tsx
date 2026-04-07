@@ -11,15 +11,30 @@ export default function Navigation() {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
+    const container =
+      document.querySelector(".snap-container") || window;
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      const el = container instanceof Window ? document.documentElement : (container as HTMLElement);
+      const currentScrollY =
+        container instanceof Window ? window.scrollY : el.scrollTop;
       setHidden(currentScrollY > lastScrollY && currentScrollY > 100);
       setScrolled(currentScrollY > 50);
       setLastScrollY(currentScrollY);
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => container.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+    const id = href.replace("#", "");
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
     <motion.header
@@ -33,20 +48,20 @@ export default function Navigation() {
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <a
-          href="#hero"
+        <button
+          onClick={() => handleNavClick("#hero")}
           className={`font-heading text-xl font-bold transition-colors duration-500 ${
             scrolled ? "text-primary" : "text-surface"
           }`}
         >
           GIA HUY
-        </a>
+        </button>
 
         <ul className="hidden md:flex gap-8">
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
-              <a
-                href={item.href}
+              <button
+                onClick={() => handleNavClick(item.href)}
                 className={`text-sm transition-colors duration-500 ${
                   scrolled
                     ? "text-muted hover:text-primary"
@@ -54,7 +69,7 @@ export default function Navigation() {
                 }`}
               >
                 {item.label}
-              </a>
+              </button>
             </li>
           ))}
         </ul>
@@ -94,13 +109,12 @@ export default function Navigation() {
             <ul className="px-6 py-4 flex flex-col gap-4">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
-                  <a
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
+                  <button
+                    onClick={() => handleNavClick(item.href)}
                     className={`text-lg font-heading ${scrolled ? "text-primary" : "text-surface"}`}
                   >
                     {item.label}
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>

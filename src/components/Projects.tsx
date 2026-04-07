@@ -25,7 +25,7 @@ function ProjectSection({
 
   return (
     <section
-      className={`min-h-screen relative flex items-center overflow-hidden ${
+      className={`snap-section relative flex items-center overflow-hidden ${
         isEven ? "bg-surface-dark" : "bg-primary"
       }`}
     >

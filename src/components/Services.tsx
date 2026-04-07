@@ -4,7 +4,7 @@ import SectionHeader from "./SectionHeader";
 
 export default function Services({ services }: { services: Service[] }) {
   return (
-    <section id="services" className="py-24 px-6">
+    <section id="services" className="snap-section py-24 px-6 flex items-center">
       <div className="max-w-7xl mx-auto">
         <SectionHeader label="Services" title="What I Do" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

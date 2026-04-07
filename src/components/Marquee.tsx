@@ -8,7 +8,7 @@ export default function Marquee({ items }: { items: MarqueeItem[] }) {
   const repeated = `${text} \u2014 ${text} \u2014 `;
 
   return (
-    <section className="py-6 bg-surface-dark text-surface overflow-hidden">
+    <section className="snap-section-auto py-6 bg-surface-dark text-surface overflow-hidden">
       <motion.div
         animate={{ x: ["0%", "-50%"] }}
         transition={{ duration: 20, ease: "linear", repeat: Infinity }}

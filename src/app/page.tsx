@@ -43,7 +43,7 @@ export default async function Home() {
   ]);
 
   return (
-    <main>
+    <main className="snap-container">
       <Hero data={hero} />
       <Marquee items={marqueeItems} />
       <About data={about} />

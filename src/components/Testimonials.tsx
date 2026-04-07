@@ -5,7 +5,7 @@ import SectionHeader from "./SectionHeader";
 
 export default function Testimonials({ items }: { items: Testimonial[] }) {
   return (
-    <section id="testimonials" className="py-24 px-6">
+    <section id="testimonials" className="snap-section py-24 px-6 flex items-center">
       <div className="max-w-7xl mx-auto">
         <SectionHeader label="Testimonials" title="Kind Words" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -11,7 +11,7 @@ function formatDate(date: string) {
 
 export default function Experience({ items }: { items: ExperienceData[] }) {
   return (
-    <section id="experience" className="py-24 px-6 bg-secondary">
+    <section id="experience" className="snap-section py-24 px-6 bg-secondary flex items-center">
       <div className="max-w-4xl mx-auto">
         <SectionHeader label="Experience" title="My Journey" />
         <div className="relative">

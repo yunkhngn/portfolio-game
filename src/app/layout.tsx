@@ -48,7 +48,7 @@ export default function RootLayout({
       lang="en"
       className={`${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}
     >
-      <body className="bg-surface text-primary font-body antialiased">
+      <body className="bg-surface text-primary font-body antialiased overflow-hidden h-dvh">
         <Navigation />
         {children}
       </body>

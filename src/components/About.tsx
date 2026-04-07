@@ -6,7 +6,7 @@ import SectionHeader from "./SectionHeader";
 
 export default function About({ data }: { data: AboutData }) {
   return (
-    <section id="about" className="py-24 px-6">
+    <section id="about" className="snap-section py-24 px-6 flex items-center">
       <div className="max-w-7xl mx-auto">
         <SectionHeader label="About" title="About Me" />
         <div className="grid md:grid-cols-2 gap-12 items-center">

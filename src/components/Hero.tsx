@@ -46,7 +46,7 @@ export default function Hero({ data }: { data: HeroData }) {
   return (
     <section
       id="hero"
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-surface-dark"
+      className="snap-section relative flex items-center justify-center overflow-hidden bg-surface-dark"
     >
       {/* Subtle grid pattern */}
       <div
