@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import Navigation from "@/components/Navigation";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -23,8 +24,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}>
+    <html
+      lang="en"
+      className={`${spaceGrotesk.variable} ${inter.variable} scroll-smooth`}
+    >
       <body className="bg-surface text-primary font-body antialiased">
+        <Navigation />
         {children}
       </body>
     </html>
