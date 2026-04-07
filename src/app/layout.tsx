@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter } from "next/font/google";
+import { getSiteConfig } from "@/lib/contentful";
 import Navigation from "@/components/Navigation";
 import "./globals.css";
 
@@ -13,10 +14,29 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  title: "Gia Huy — Marketing Portfolio",
-  description: "Game Marketing, Livestream Production & Outdoor Activations",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const config = await getSiteConfig();
+  return {
+    title: config?.title || "Gia Huy — Marketing Portfolio",
+    description:
+      config?.tagline ||
+      "Game Marketing, Livestream Production & Outdoor Activations",
+    openGraph: {
+      title: config?.title || "Gia Huy — Marketing Portfolio",
+      description:
+        config?.tagline ||
+        "Game Marketing, Livestream Production & Outdoor Activations",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: config?.title || "Gia Huy — Marketing Portfolio",
+      description:
+        config?.tagline ||
+        "Game Marketing, Livestream Production & Outdoor Activations",
+    },
+  };
+}
 
 export default function RootLayout({
   children,
