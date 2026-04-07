@@ -10,12 +10,22 @@ export interface SiteConfig {
 
 export type ProjectType = "Game" | "Clip" | "Outdoor";
 
+export interface HeroFloatingObject {
+  image: Asset;
+  position: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center-left" | "center-right";
+  size?: "sm" | "md" | "lg";
+  rotate?: number;
+}
+
 export interface HeroSection {
-  heading: string;
-  subheading: string;
+  label: string;
+  headingLine1: string;
+  headingLine2: string;
+  name: string;
+  year: string;
+  floatingObjects?: HeroFloatingObject[];
   backgroundImage?: Asset;
   backgroundVideo?: Asset;
-  ctaText: string;
 }
 
 export interface AboutSection {

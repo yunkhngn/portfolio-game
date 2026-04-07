@@ -52,11 +52,49 @@ export const mockSiteConfig: SiteConfig = {
 };
 
 export const mockHero: HeroSection = {
-  heading: "Where Games Meet the Real World",
-  subheading:
-    "Marketing creative specializing in game campaigns, livestream production, and large-scale outdoor activations. 30+ projects managed. 125M+ impressions delivered.",
-  backgroundImage: placeholder(1920, 1080, "Hero+BG"),
-  ctaText: "See My Work",
+  label: "Marketing",
+  headingLine1: "Creative",
+  headingLine2: "Portfolio",
+  name: "Gia Huy",
+  year: "2026",
+  floatingObjects: [
+    {
+      image: placeholder(400, 400, "🎮"),
+      position: "top-left",
+      size: "lg",
+      rotate: -15,
+    },
+    {
+      image: placeholder(400, 400, "🎬"),
+      position: "top-right",
+      size: "md",
+      rotate: 10,
+    },
+    {
+      image: placeholder(400, 400, "🎧"),
+      position: "center-left",
+      size: "md",
+      rotate: -5,
+    },
+    {
+      image: placeholder(400, 400, "📱"),
+      position: "center-right",
+      size: "lg",
+      rotate: 8,
+    },
+    {
+      image: placeholder(400, 400, "🎪"),
+      position: "bottom-left",
+      size: "md",
+      rotate: 12,
+    },
+    {
+      image: placeholder(400, 400, "⌚"),
+      position: "bottom-right",
+      size: "sm",
+      rotate: -20,
+    },
+  ],
 };
 
 export const mockAbout: AboutSection = {

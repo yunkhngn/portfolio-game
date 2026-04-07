@@ -71,11 +71,13 @@ export async function getHero(): Promise<HeroSection> {
     if (!entries.items.length) return mockHero;
     const fields = entries.items[0].fields as any;
     return {
-      heading: fields.heading,
-      subheading: fields.subheading,
+      label: fields.label || mockHero.label,
+      headingLine1: fields.headingLine1 || mockHero.headingLine1,
+      headingLine2: fields.headingLine2 || mockHero.headingLine2,
+      name: fields.name || mockHero.name,
+      year: fields.year || mockHero.year,
       backgroundImage: parseAsset(fields.backgroundImage),
       backgroundVideo: parseAsset(fields.backgroundVideo),
-      ctaText: fields.ctaText,
     };
   } catch {
     return mockHero;
