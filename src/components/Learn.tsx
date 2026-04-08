@@ -77,7 +77,7 @@ export default function LearnSection({ data }: { data: Learn }) {
                 <span className="w-2 h-2 bg-accent rounded-full animate-pulse shadow-[0_0_8px_rgba(255,77,0,0.8)]"></span>
                 <span className="text-[10px] font-heading font-black uppercase tracking-[0.2em] text-surface">Key Learnings</span>
               </div>
-              <h2 className="font-heading text-5xl md:text-6xl lg:text-[5rem] font-black leading-[0.9] tracking-tighter text-surface uppercase mb-10">
+              <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-[5rem] font-black leading-[0.9] tracking-tighter text-surface uppercase mb-10 break-words">
                 {data.title}
               </h2>
             </ScrollReveal>

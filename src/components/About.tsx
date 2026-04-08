@@ -39,7 +39,7 @@ export default function About({ data }: { data: AboutData }) {
           {/* Right Column: Content Grid */}
           <div className="lg:col-span-7 flex flex-col gap-10 lg:gap-14">
             <ScrollReveal direction="right" delay={0.1}>
-               <h3 className="font-heading text-5xl md:text-6xl lg:text-7xl font-black text-primary tracking-tight leading-none">
+               <h3 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black text-primary tracking-tight leading-none">
                   Hello! I'm <span className="text-accent">{data.name}</span>
                </h3>
             </ScrollReveal>

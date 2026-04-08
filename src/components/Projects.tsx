@@ -68,7 +68,7 @@ function ProjectSection({
               </div>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={0.05}>
-              <h2 className="font-heading text-4xl md:text-5xl lg:text-[4rem] font-black leading-[0.9] tracking-tighter text-surface uppercase">
+              <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-[4rem] font-black leading-[0.9] tracking-tighter text-surface uppercase break-words">
                 {project.title}
               </h2>
             </ScrollReveal>

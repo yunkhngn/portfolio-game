@@ -19,7 +19,7 @@ export default function Services({ services }: { services: Service[] }) {
             <span className="w-1 h-1 bg-accent rounded-full inline-block shadow-[0_0_8px_rgba(255,77,0,0.5)]"></span>
             Services
           </p>
-          <h2 className="font-heading text-5xl md:text-6xl lg:text-[5rem] font-black leading-[0.9] tracking-tighter text-primary uppercase">
+          <h2 className="font-heading text-4xl md:text-5xl lg:text-6xl xl:text-[5rem] font-black leading-[0.9] tracking-tighter text-primary uppercase">
             What I Do
           </h2>
         </ScrollReveal>

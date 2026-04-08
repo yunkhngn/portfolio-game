@@ -29,7 +29,7 @@ export default function Contact({ config }: { config: SiteConfig }) {
         <ScrollReveal direction="up" delay={0.1}>
           <a
             href={`mailto:${config.email}`}
-            className="group relative inline-block text-surface font-heading text-4xl md:text-6xl lg:text-[7vw] font-black uppercase tracking-tighter leading-none hover:text-accent transition-colors duration-500 mb-16"
+            className="group relative inline-block text-surface font-heading text-3xl md:text-5xl lg:text-[5vw] font-black uppercase tracking-tighter leading-none hover:text-accent transition-colors duration-500 mb-16 break-all"
           >
             {config.email}
             {/* Hover dash line effect */}

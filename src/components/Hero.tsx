@@ -149,7 +149,7 @@ export default function Hero({ data }: { data: HeroData }) {
 
         {/* Main heading line 1 */}
         <motion.div variants={itemVariants} className="relative inline-block">
-          <h1 className="font-heading text-7xl md:text-[10rem] lg:text-[12rem] font-extrabold leading-[0.85] tracking-tight text-accent">
+          <h1 className="font-heading text-6xl md:text-8xl lg:text-[9rem] xl:text-[12rem] font-extrabold leading-[0.85] tracking-tight text-accent">
             {data.headingLine1}
           </h1>
         </motion.div>
@@ -164,7 +164,7 @@ export default function Hero({ data }: { data: HeroData }) {
 
         {/* Main heading line 2 */}
         <motion.div variants={itemVariants}>
-          <h1 className="font-heading text-7xl md:text-[10rem] lg:text-[12rem] font-extrabold leading-[0.85] tracking-tight text-accent">
+          <h1 className="font-heading text-6xl md:text-8xl lg:text-[9rem] xl:text-[12rem] font-extrabold leading-[0.85] tracking-tight text-accent">
             {data.headingLine2}
           </h1>
         </motion.div>

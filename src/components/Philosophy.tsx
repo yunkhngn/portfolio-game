@@ -54,7 +54,7 @@ export default function Philosophy() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.1}>
-            <h2 className="font-heading text-4xl md:text-5xl lg:text-[4.5rem] font-black leading-[0.95] tracking-tighter text-primary uppercase mb-8">
+            <h2 className="font-heading text-3xl md:text-4xl lg:text-5xl xl:text-[4.5rem] font-black leading-[0.95] tracking-tighter text-primary uppercase mb-8">
               I believe marketing
               <br />
               <span className="text-accent">is storytelling</span>
