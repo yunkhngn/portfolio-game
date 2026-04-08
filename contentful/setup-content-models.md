@@ -101,3 +101,25 @@ Create the following content models in your Contentful space. Use exact field ID
 |----------|------------|----------|---------------------------|
 | `text`   | Short text | Yes      | Ribbon/marquee text        |
 | `order`  | Integer    | Yes      | Sort order                 |
+
+---
+
+## 8. Achievement
+
+| Field ID      | Type         | Required | Notes                                    |
+|---------------|--------------|----------|------------------------------------------|
+| `title`       | Short text   | Yes      | Title of the achievement (e.g. PROJECT M-BOX)|
+| `description` | Rich text    | Yes      | Bullet points describing the achievement |
+| `media1`      | Media        | Yes      | The first image (bottom left)            |
+| `media2`      | Media        | Yes      | The second image (top right)             |
+
+---
+
+## 9. Learn (Content Type ID: `learn`)
+
+| Field ID      | Type         | Required | Notes                                    |
+|---------------|--------------|----------|------------------------------------------|
+| `title`       | Short text   | Yes      | Title of the learning section            |
+| `description` | Rich text    | Yes      | Bullet points describing learnings       |
+| `media1`      | Media        | Yes      | The first image                          |
+| `media2`      | Media        | Yes      | The second image                         |

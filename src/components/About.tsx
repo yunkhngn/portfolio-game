@@ -18,7 +18,7 @@ export default function About({ data }: { data: AboutData }) {
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
         <SectionHeader label="About" title="About Me" />
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-12">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-6">
           {/* Left Column: Big Image */}
           <ScrollReveal direction="left" className="lg:col-span-5 relative">
             <div className="relative w-full max-w-sm mx-auto aspect-[4/5] overflow-hidden rounded-3xl shadow-[15px_15px_0_var(--color-accent)] border-4 border-primary group">
@@ -27,7 +27,7 @@ export default function About({ data }: { data: AboutData }) {
                 src={data.photo.url}
                 alt="Portrait"
                 fill
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
+                className="object-cover transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
               />
             </div>
             {/* Stamp / Label */}

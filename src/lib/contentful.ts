@@ -8,9 +8,13 @@ import type {
   Experience,
   Testimonial,
   MarqueeItem,
+  MarqueeItem,
   Asset,
+  Achievement,
+  Learn,
 } from "./types";
 import { DEFAULT_PLACEHOLDER } from "./constants";
+import { mockAchievement, mockLearn } from "./mock-data";
 
 const isContentfulConfigured =
   !!process.env.CONTENTFUL_SPACE_ID && !!process.env.CONTENTFUL_ACCESS_TOKEN;
@@ -158,4 +162,52 @@ export async function getMarqueeItems(): Promise<MarqueeItem[]> {
   });
   if (!entries.items.length) return [];
   return entries.items.map((item: any) => item.fields as MarqueeItem);
+}
+
+export async function getAchievement(): Promise<Achievement> {
+  try {
+    const entries = await client.getEntries({
+      content_type: "achevement",
+      limit: 1,
+    });
+    
+    if (!entries.items.length) {
+      return mockAchievement;
+    }
+    
+    const fields = entries.items[0].fields as any;
+    return {
+      title: fields.title || "",
+      description: fields.description || null,
+      media1: parseAsset(fields.media1),
+      media2: parseAsset(fields.media2),
+    };
+  } catch (error) {
+    console.warn("Achievement content type not found or failed to fetch. Falling back to mock data.");
+    return mockAchievement;
+  }
+}
+
+export async function getLearn(): Promise<Learn> {
+  try {
+    const entries = await client.getEntries({
+      content_type: "learn",
+      limit: 1,
+    });
+    
+    if (!entries.items.length) {
+      return mockLearn;
+    }
+    
+    const fields = entries.items[0].fields as any;
+    return {
+      title: fields.title || "",
+      description: fields.description || null,
+      media1: parseAsset(fields.media1),
+      media2: parseAsset(fields.media2),
+    };
+  } catch (error) {
+    console.warn("Learn content type not found or failed to fetch. Falling back to mock data.");
+    return mockLearn;
+  }
 }

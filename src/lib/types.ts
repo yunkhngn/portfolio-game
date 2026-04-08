@@ -86,6 +86,20 @@ export interface Testimonial {
   order: number;
 }
 
+export interface Achievement {
+  title: string;
+  description: Document;
+  media1: Asset;
+  media2: Asset;
+}
+
+export interface Learn {
+  title: string;
+  description: Document;
+  media1: Asset;
+  media2: Asset;
+}
+
 export interface MarqueeItem {
   text: string;
   order: number;

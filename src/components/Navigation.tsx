@@ -1,27 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { NAV_ITEMS } from "@/lib/constants";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const container =
-      document.querySelector(".snap-container") || window;
-
-    const handleScroll = () => {
-      const el = container instanceof Window ? document.documentElement : (container as HTMLElement);
-      const currentScrollY =
-        container instanceof Window ? window.scrollY : el.scrollTop;
-      setScrolled(currentScrollY > 50);
-    };
-
-    container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
@@ -34,82 +18,79 @@ export default function Navigation() {
 
   return (
     <motion.header
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-surface/90 backdrop-blur-lg shadow-card border-b border-secondary"
-          : "bg-transparent border-b border-transparent"
-      }`}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      className="fixed top-6 left-0 right-0 z-[100] px-4 md:px-0 flex justify-center w-full pointer-events-none"
     >
-      <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="pointer-events-auto bg-surface-dark/70 backdrop-blur-xl border border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] rounded-full w-full max-w-6xl px-4 md:px-8 h-14 md:h-16 flex items-center justify-between">
+        
+        {/* LOGO */}
         <button
           onClick={() => handleNavClick("#hero")}
-          className={`font-heading text-xl font-bold transition-colors duration-500 ${
-            scrolled ? "text-primary" : "text-surface"
-          }`}
+          className="font-heading text-xs md:text-sm font-black uppercase tracking-[0.3em] text-surface group flex items-center gap-3 shrink-0 whitespace-nowrap"
         >
-          GIA HUY
+          <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-accent rounded-full group-hover:scale-150 group-hover:shadow-[0_0_10px_rgba(255,77,0,0.8)] transition-all duration-300"></span>
+          Gia Huy
         </button>
 
-        <ul className="hidden md:flex gap-8">
+        {/* DESKTOP NAV */}
+        <ul className="hidden md:flex items-center gap-5 lg:gap-8 overflow-hidden">
           {NAV_ITEMS.map((item) => (
             <li key={item.href}>
               <button
                 onClick={() => handleNavClick(item.href)}
-                className={`text-sm transition-colors duration-500 ${
-                  scrolled
-                    ? "text-muted hover:text-primary"
-                    : "text-surface/60 hover:text-surface"
-                }`}
+                className="relative text-[10px] md:text-[11px] uppercase tracking-[0.25em] font-bold text-surface/70 hover:text-surface transition-colors duration-300 group py-2"
               >
                 {item.label}
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-[2px] bg-accent group-hover:w-full transition-all duration-300 ease-out"></span>
               </button>
             </li>
           ))}
         </ul>
 
+        {/* MOBILE TOGGLE */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden flex flex-col gap-1.5 w-8 h-8 justify-center"
+          className="md:hidden flex flex-col gap-1.5 justify-center w-8 h-8 rounded-full focus:outline-none"
           aria-label="Toggle menu"
         >
           <motion.span
-            animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }}
-            className={`block h-0.5 w-full transition-colors duration-500 ${scrolled ? "bg-primary" : "bg-surface"}`}
+            animate={isOpen ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
+            className="block h-[2px] w-full bg-surface transition-all duration-300 transform origin-center"
           />
           <motion.span
             animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
-            className={`block h-0.5 w-full transition-colors duration-500 ${scrolled ? "bg-primary" : "bg-surface"}`}
+            className="block h-[2px] w-full bg-surface transition-all duration-300"
           />
           <motion.span
-            animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }}
-            className={`block h-0.5 w-full transition-colors duration-500 ${scrolled ? "bg-primary" : "bg-surface"}`}
+            animate={isOpen ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
+            className="block h-[2px] w-full bg-surface transition-all duration-300 transform origin-center"
           />
         </button>
-      </nav>
+      </div>
 
+      {/* MOBILE MENU DROPDOWN */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            className={`md:hidden overflow-hidden border-b ${
-              scrolled
-                ? "bg-surface border-primary/5"
-                : "bg-surface-dark border-surface/10"
-            }`}
+            initial={{ opacity: 0, y: -20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -20, scale: 0.95 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="absolute top-20 md:hidden pointer-events-auto bg-surface-dark/95 backdrop-blur-2xl border border-white/10 shadow-2xl rounded-3xl w-[calc(100%-2rem)] max-w-sm overflow-hidden"
           >
-            <ul className="px-6 py-4 flex flex-col gap-4">
+            <ul className="flex flex-col py-6 px-8 gap-6">
               {NAV_ITEMS.map((item) => (
                 <li key={item.href}>
                   <button
                     onClick={() => handleNavClick(item.href)}
-                    className={`text-lg font-heading ${scrolled ? "text-primary" : "text-surface"}`}
+                    className="group flex flex-col gap-2 w-full text-left"
                   >
-                    {item.label}
+                    <span className="text-sm font-heading font-black uppercase tracking-[0.2em] text-surface group-hover:text-accent transition-colors duration-300">
+                      {item.label}
+                    </span>
+                    <span className="w-0 h-[1px] bg-accent group-hover:w-12 transition-all duration-300 ease-out"></span>
                   </button>
                 </li>
               ))}

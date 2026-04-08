@@ -6,9 +6,11 @@ import type {
   Service,
   Experience,
   Testimonial,
+  Achievement,
+  Learn,
   MarqueeItem,
 } from "./types";
-import { BLOCKS, type Document } from "@contentful/rich-text-types";
+import { BLOCKS, INLINES, type Document } from "@contentful/rich-text-types";
 
 function richText(text: string): Document {
   return {
@@ -18,9 +20,31 @@ function richText(text: string): Document {
       {
         nodeType: BLOCKS.PARAGRAPH,
         data: {},
-        content: [{ nodeType: "text", value: text, marks: [], data: {} }],
-      },
-    ],
+        content: [{ nodeType: "text", value: text, marks: [], data: {} }]
+      }
+    ]
+  };
+}
+
+function richListText(text: string): Document {
+  return {
+    nodeType: BLOCKS.DOCUMENT,
+    data: {},
+    content: [
+      {
+        nodeType: BLOCKS.UL_LIST,
+        data: {},
+        content: text.split("\n").map(line => ({
+          nodeType: BLOCKS.LIST_ITEM,
+          data: {},
+          content: [{
+            nodeType: BLOCKS.PARAGRAPH,
+            data: {},
+            content: [{ nodeType: "text", value: line.trim(), marks: [], data: {} }]
+          }]
+        }))
+      }
+    ]
   };
 }
 
@@ -375,3 +399,21 @@ export const mockMarqueeItems: MarqueeItem[] = [
   { text: "125M+ Impressions", order: 7 },
   { text: "30+ Projects", order: 8 },
 ];
+
+export const mockAchievement: Achievement = {
+  title: "PROJECT M-BOX",
+  description: richListText(
+    "Developed the M-BOX smart medicine cabinet prototype, integrating AI and machine learning to support automated prescription recommendations.\nConducted consumer behavior analysis, customer journey mapping, and market research to identify user needs and product opportunities.\nDesigned the machine layout, core functions, and pitching materials, and presented the product concept and innovation to stakeholders."
+  ),
+  media1: placeholder(1200, 800, "M-BOX+Prototype"),
+  media2: placeholder(1200, 800, "M-BOX+Pitching"),
+};
+
+export const mockLearn: Learn = {
+  title: "WHAT I HAVE LEARNED",
+  description: richListText(
+    "Mastered project management methodologies and cross-functional team coordination during the campaign lifecycle.\nDeepened knowledge of consumer behavior psychology to craft better marketing angles.\nGained hands-on experience with data analytics to measure campaign performance."
+  ),
+  media1: placeholder(1200, 800, "Learning+Process"),
+  media2: placeholder(1200, 800, "Team+Collaboration"),
+};
