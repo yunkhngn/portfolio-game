@@ -98,6 +98,9 @@ export const mockHero: HeroSection = {
 };
 
 export const mockAbout: AboutSection = {
+  name: "Lý Gia Huy",
+  education: "University of Economics Ho Chi Minh City",
+  educationDetail: "B.A. in E-commerce Marketing",
   bio: richText(
     "I am a Marketing professional with a strong passion for the gaming industry and player communities. I specialize in how games build emotional connections with players through creative campaigns, community engagement, and viral content. Currently majoring in E-commerce Marketing at the University of Economics Ho Chi Minh City (UEH) with a GPA of 3.75/4, I have managed and organized 30+ projects of various scales — from game launch campaigns at VNGGAMES to large-scale student festivals with 8,000+ attendees. My work spans integrated campaign execution, KOL livestream production, OOH roadshows, and cross-functional team coordination."
   ),
@@ -112,6 +115,14 @@ export const mockAbout: AboutSection = {
     "AI-Driven Social Media",
     "Livestream Production",
     "OOH & Roadshow",
+  ],
+  software: [
+    "Figma",
+    "Photoshop",
+    "Illustrator",
+    "Premiere Pro",
+    "Notion",
+    "Jira",
   ],
 };
 
