@@ -8,7 +8,6 @@ import type {
   Experience,
   Testimonial,
   MarqueeItem,
-  MarqueeItem,
   Asset,
   Achievement,
   Learn,
