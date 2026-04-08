@@ -75,10 +75,6 @@ export async function generateMetadata(): Promise<Metadata> {
       images: [ogImage],
       creator: "@giahuy",
     },
-    icons: {
-      icon: "/favicon.ico",
-      apple: "/apple-touch-icon.png",
-    },
   };
 }
 
