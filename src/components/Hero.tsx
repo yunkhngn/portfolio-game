@@ -47,25 +47,28 @@ const floatVariants = {
 };
 
 const positionClasses: Record<string, string> = {
-  "top-left": "top-[8%] left-[5%] md:top-[10%] md:left-[8%]",
-  "top-right": "top-[6%] right-[5%] md:top-[8%] md:right-[6%]",
-  "bottom-left": "bottom-[10%] left-[3%] md:bottom-[12%] md:left-[6%]",
-  "bottom-right": "bottom-[8%] right-[3%] md:bottom-[10%] md:right-[5%]",
-  "center-left": "top-[45%] left-[2%] md:top-[40%] md:left-[4%] -translate-y-1/2",
-  "center-right": "top-[45%] right-[2%] md:top-[40%] md:right-[4%] -translate-y-1/2",
+  "top-left": "-top-[5%] -left-[10%] md:-top-[10%] md:-left-[5%]",
+  "top-right": "-top-[15%] -right-[20%] md:-top-[25%] md:-right-[15%]",
+  "bottom-left": "-bottom-[15%] -left-[15%] md:-bottom-[20%] md:-left-[10%]",
+  "bottom-right": "-bottom-[10%] -right-[10%] md:-bottom-[15%] md:-right-[5%]",
+  "center-left": "top-[45%] left-[2%] md:top-[40%] md:-left-[10%] -translate-y-1/2",
+  "center-right": "top-[45%] right-[2%] md:top-[40%] md:-right-[10%] -translate-y-1/2",
 };
 
 const sizeClasses: Record<string, string> = {
-  sm: "w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32",
-  md: "w-28 h-28 md:w-36 md:h-36 lg:w-44 lg:h-44",
-  lg: "w-32 h-32 md:w-44 md:h-44 lg:w-56 lg:h-56",
+  sm: "w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64",
+  md: "w-48 h-48 md:w-64 md:h-64 lg:w-96 lg:h-96",
+  lg: "w-64 h-64 md:w-80 md:h-80 lg:w-[450px] lg:h-[450px]",
+  xl: "w-80 h-80 md:w-96 md:h-96 lg:w-[550px] lg:h-[550px]",
+  "2xl": "w-96 h-96 md:w-[500px] md:h-[500px] lg:w-[700px] lg:h-[700px]",
+  "3xl": "w-[400px] h-[400px] md:w-[600px] md:h-[600px] lg:w-[900px] lg:h-[900px]",
 };
 
 const hardcodedDecorations = [
-  { url: "/hero-gamepad.png", position: "top-left", size: "md", rotate: -15 },
-  { url: "/hero-keyboard.png", position: "top-right", size: "lg", rotate: 10 },
-  { url: "/hero-headphones.png", position: "bottom-left", size: "lg", rotate: 15 },
-  { url: "/hero-watch.png", position: "bottom-right", size: "md", rotate: -25 },
+  { url: "/hero-gamepad.png", position: "top-left", size: "xl", rotate: -25 },
+  { url: "/hero-keyboard.png", position: "top-right", size: "3xl", rotate: 18 },
+  { url: "/hero-headphones.png", position: "bottom-left", size: "2xl", rotate: 20 },
+  { url: "/hero-watch.png", position: "bottom-right", size: "xl", rotate: -35 },
 ];
 
 export default function Hero({ data }: { data: HeroData }) {
