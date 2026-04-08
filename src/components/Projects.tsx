@@ -49,39 +49,45 @@ function ProjectSection({
 
       <div className="max-w-[1400px] mx-auto px-6 lg:px-10 w-full relative z-10 py-10 lg:py-0">
         {/* === Top Row: Header === */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6 lg:mb-8">
-          <div className="flex-1">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between items-start gap-6 mb-8 lg:mb-12">
+          <div className="flex-1 max-w-2xl">
             <ScrollReveal direction="up">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="px-3 py-1 rounded-full border border-surface/25 text-surface/70 text-[10px] uppercase tracking-[0.15em] font-bold bg-white/5">
+              <div className="flex items-center flex-wrap gap-x-4 gap-y-2 mb-4">
+                <span className="px-3 py-1 rounded-full border border-accent/30 text-accent text-[10px] uppercase tracking-[0.2em] font-black bg-accent/5">
                   {project.projectType}
                 </span>
-                <span className="text-surface/40 text-[11px] font-bold uppercase tracking-wider">
-                  Project {String(index + 1).padStart(2, "0")} / {project.category}
-                </span>
-                <span className="font-heading font-bold text-accent text-sm ml-auto hidden lg:block">
-                  {project.year}
-                </span>
+                <div className="flex items-center gap-2">
+                  <span className="text-surface/40 text-[11px] font-bold uppercase tracking-widest">
+                    Project {String(index + 1).padStart(2, "0")} / {project.category}
+                  </span>
+                  <span className="w-1 h-1 bg-surface/20 rounded-full"></span>
+                  <span className="text-accent font-heading font-black text-[13px] tracking-tighter">
+                    {project.year}
+                  </span>
+                </div>
               </div>
             </ScrollReveal>
             <ScrollReveal direction="up" delay={0.05}>
-              <h2 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold leading-[0.95] tracking-tight text-surface">
+              <h2 className="font-heading text-4xl md:text-5xl lg:text-[4rem] font-black leading-[0.9] tracking-tighter text-surface uppercase">
                 {project.title}
               </h2>
             </ScrollReveal>
           </div>
 
-          {/* Tools inline with header on desktop */}
-          <ScrollReveal direction="up" delay={0.1} className="shrink-0">
-            <div className="flex flex-wrap gap-1.5 lg:justify-end">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-2.5 py-1 bg-white/5 border border-white/10 rounded text-surface/70 text-[9px] font-bold uppercase tracking-widest"
-                >
-                  {tag}
-                </span>
-              ))}
+          {/* Tools anchored to the right but visually connected */}
+          <ScrollReveal direction="up" delay={0.1} className="lg:mb-2 shrink-0">
+            <div className="flex flex-col lg:items-end gap-2">
+              <span className="text-[10px] text-surface/30 font-bold uppercase tracking-[0.2em]">Keywords :</span>
+              <div className="flex flex-wrap gap-2 lg:justify-end">
+                {project.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-3 py-1.5 bg-surface/5 border border-surface/10 rounded-md text-surface/80 text-[10px] font-bold uppercase tracking-widest hover:bg-accent/10 hover:border-accent/30 transition-colors"
+                  >
+                    {tag}
+                  </span>
+                ))}
+              </div>
             </div>
           </ScrollReveal>
         </div>

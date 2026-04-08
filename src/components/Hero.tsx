@@ -193,6 +193,7 @@ export default function Hero({ data }: { data: HeroData }) {
         <div className="w-2 h-2 rounded-full bg-accent" />
         <div className="w-2 h-2 rounded-full bg-accent" />
       </div>
+
     </section>
   );
 }

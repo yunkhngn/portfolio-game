@@ -5,11 +5,9 @@ import {
   getProjects,
   getServices,
   getExperiences,
-  getMarqueeItems,
 } from "@/lib/contentful";
 
 import Hero from "@/components/Hero";
-import Marquee from "@/components/Marquee";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Services from "@/components/Services";
@@ -27,7 +25,6 @@ export default async function Home() {
     projects,
     services,
     experiences,
-    marqueeItems,
   ] = await Promise.all([
     getSiteConfig(),
     getHero(),
@@ -35,13 +32,11 @@ export default async function Home() {
     getProjects(),
     getServices(),
     getExperiences(),
-    getMarqueeItems(),
   ]);
 
   return (
     <main className="snap-container">
       <Hero data={hero} />
-      <Marquee items={marqueeItems} />
       <About data={about} />
       <Projects projects={projects} />
       <Services services={services} />
