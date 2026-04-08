@@ -5,7 +5,6 @@ import {
   getProjects,
   getServices,
   getExperiences,
-  getTestimonials,
   getMarqueeItems,
 } from "@/lib/contentful";
 
@@ -15,7 +14,6 @@ import About from "@/components/About";
 import Projects from "@/components/Projects";
 import Services from "@/components/Services";
 import Experience from "@/components/Experience";
-import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -29,7 +27,6 @@ export default async function Home() {
     projects,
     services,
     experiences,
-    testimonials,
     marqueeItems,
   ] = await Promise.all([
     getSiteConfig(),
@@ -38,7 +35,6 @@ export default async function Home() {
     getProjects(),
     getServices(),
     getExperiences(),
-    getTestimonials(),
     getMarqueeItems(),
   ]);
 
@@ -50,7 +46,6 @@ export default async function Home() {
       <Projects projects={projects} />
       <Services services={services} />
       <Experience items={experiences} />
-      <Testimonials items={testimonials} />
       <Contact config={config} />
       <Footer />
     </main>

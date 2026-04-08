@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { Gamepad2 } from "lucide-react";
 import type { HeroSection as HeroData } from "@/lib/types";
 
 const containerVariants = {
@@ -85,13 +86,21 @@ export default function Hero({ data }: { data: HeroData }) {
         animate="visible"
         className="relative z-20 text-center px-6"
       >
-        {/* Small label above */}
-        <motion.p
+        {/* Name badge + year row */}
+        <motion.div
           variants={itemVariants}
-          className="font-heading text-[10px] md:text-xs uppercase tracking-[0.4em] text-surface/40 mb-4 md:mb-6"
+          className="flex items-center justify-center gap-4 md:gap-6 mb-4 md:mb-6"
         >
-          {data.label}
-        </motion.p>
+          <span className="flex items-center gap-3 px-5 py-2 border border-surface/20 rounded-full text-[10px] md:text-xs font-heading uppercase tracking-[0.3em] text-surface/60 bg-surface-dark/20 backdrop-blur-sm shadow-sm">
+            <div className="w-6 h-6 flex items-center justify-center bg-accent rounded-full text-primary shadow-[0_0_10px_rgba(255,77,0,0.5)]">
+              <Gamepad2 className="w-3.5 h-3.5" />
+            </div>
+            {data.name}
+          </span>
+          <span className="text-surface/30 font-heading text-sm md:text-base tracking-wider">
+            {data.year}
+          </span>
+        </motion.div>
 
         {/* Main heading line 1 */}
         <motion.div variants={itemVariants} className="relative inline-block">
@@ -100,18 +109,13 @@ export default function Hero({ data }: { data: HeroData }) {
           </h1>
         </motion.div>
 
-        {/* Name badge + year row */}
-        <motion.div
+        {/* Small label middle */}
+        <motion.p
           variants={itemVariants}
-          className="flex items-center justify-center gap-4 md:gap-6 my-2 md:my-3"
+          className="font-heading text-[10px] md:text-xs uppercase tracking-[0.4em] text-surface/40 my-2 md:my-3"
         >
-          <span className="px-4 py-1.5 border border-surface/20 text-[10px] md:text-xs font-heading uppercase tracking-[0.3em] text-surface/60">
-            {data.name}
-          </span>
-          <span className="text-surface/30 font-heading text-sm md:text-base tracking-wider">
-            {data.year}
-          </span>
-        </motion.div>
+          {data.label}
+        </motion.p>
 
         {/* Main heading line 2 */}
         <motion.div variants={itemVariants}>

@@ -8,3 +8,11 @@ export const NAV_ITEMS = [
   { label: "Experience", href: "#experience" },
   { label: "Contact", href: "#contact" },
 ] as const;
+
+export const DEFAULT_PLACEHOLDER = {
+  url: "/placeholder.png",
+  title: "Placeholder Asset",
+  width: 800,
+  height: 1200,
+  contentType: "image/png",
+} as const;

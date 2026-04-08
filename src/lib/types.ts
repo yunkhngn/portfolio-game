@@ -29,9 +29,13 @@ export interface HeroSection {
 }
 
 export interface AboutSection {
+  name: string;
+  education: string;
+  educationDetail?: string;
   bio: Document;
   photo: Asset;
   skills: string[];
+  software: string[];
 }
 
 export interface Project {
@@ -39,7 +43,15 @@ export interface Project {
   slug: string;
   projectType: ProjectType;
   category: string;
-  description: Document;
+  
+  image1Title?: string;
+  image2Title?: string;
+  situation?: Document;
+  myScope?: Document;
+  whatIveDone?: Document;
+  result?: Document;
+  keyLearning?: Document;
+
   tags: string[];
   thumbnail: Asset;
   media: Asset[];

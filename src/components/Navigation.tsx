@@ -6,9 +6,7 @@ import { NAV_ITEMS } from "@/lib/constants";
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
     const container =
@@ -18,14 +16,12 @@ export default function Navigation() {
       const el = container instanceof Window ? document.documentElement : (container as HTMLElement);
       const currentScrollY =
         container instanceof Window ? window.scrollY : el.scrollTop;
-      setHidden(currentScrollY > lastScrollY && currentScrollY > 100);
       setScrolled(currentScrollY > 50);
-      setLastScrollY(currentScrollY);
     };
 
     container.addEventListener("scroll", handleScroll, { passive: true });
     return () => container.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
 
   const handleNavClick = (href: string) => {
     setIsOpen(false);
@@ -38,9 +34,9 @@ export default function Navigation() {
 
   return (
     <motion.header
-      initial={{ y: 0 }}
-      animate={{ y: hidden ? "-100%" : 0 }}
-      transition={{ duration: 0.3 }}
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
           ? "bg-surface/90 backdrop-blur-lg shadow-card border-b border-secondary"
