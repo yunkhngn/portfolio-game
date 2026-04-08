@@ -2,8 +2,26 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Gamepad2 } from "lucide-react";
 import type { HeroSection as HeroData } from "@/lib/types";
+
+const GamepadSVG = ({ className }: { className?: string }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className={className}
+  >
+    <line x1="6" x2="10" y1="12" y2="12" />
+    <line x1="8" x2="8" y1="10" y2="14" />
+    <line x1="15" x2="15.01" y1="13" y2="13" />
+    <line x1="18" x2="18.01" y1="11" y2="11" />
+    <rect width="20" height="12" x="2" y="6" rx="2" />
+  </svg>
+);
 
 const containerVariants = {
   hidden: {},
@@ -43,6 +61,13 @@ const sizeClasses: Record<string, string> = {
   lg: "w-32 h-32 md:w-44 md:h-44 lg:w-56 lg:h-56",
 };
 
+const hardcodedDecorations = [
+  { url: "/hero-gamepad.png", position: "top-left", size: "md", rotate: -15 },
+  { url: "/hero-keyboard.png", position: "top-right", size: "lg", rotate: 10 },
+  { url: "/hero-headphones.png", position: "bottom-left", size: "lg", rotate: 15 },
+  { url: "/hero-watch.png", position: "bottom-right", size: "md", rotate: -25 },
+];
+
 export default function Hero({ data }: { data: HeroData }) {
   return (
     <section
@@ -60,14 +85,14 @@ export default function Hero({ data }: { data: HeroData }) {
       />
 
       {/* Floating objects */}
-      {data.floatingObjects?.map((obj, i) => (
+      {data.floatingObjects?.length ? data.floatingObjects.map((obj, i) => (
         <motion.div
           key={obj.position}
           custom={i}
           variants={floatVariants}
           initial="hidden"
           animate="visible"
-          className={`absolute z-10 ${positionClasses[obj.position] || ""} ${sizeClasses[obj.size || "md"]} hidden md:block`}
+          className={`absolute z-10 ${positionClasses[obj.position] || ""} ${sizeClasses[obj.size || "md"]} hidden md:block mix-blend-lighten`}
           style={{ rotate: obj.rotate ? `${obj.rotate}deg` : undefined }}
         >
           <Image
@@ -75,6 +100,23 @@ export default function Hero({ data }: { data: HeroData }) {
             alt={obj.image.title}
             fill
             className="object-contain drop-shadow-2xl"
+          />
+        </motion.div>
+      )) : hardcodedDecorations.map((obj, i) => (
+        <motion.div
+          key={obj.position}
+          custom={i}
+          variants={floatVariants}
+          initial="hidden"
+          animate="visible"
+          className={`absolute z-10 ${positionClasses[obj.position] || ""} ${sizeClasses[obj.size || "md"]} hidden md:block mix-blend-lighten pointer-events-none`}
+          style={{ rotate: `${obj.rotate}deg` }}
+        >
+          <Image
+            src={obj.url}
+            alt={`Decoration ${i}`}
+            fill
+            className="object-contain"
           />
         </motion.div>
       ))}
@@ -93,7 +135,7 @@ export default function Hero({ data }: { data: HeroData }) {
         >
           <span className="flex items-center gap-3 px-5 py-2 border border-surface/20 rounded-full text-[10px] md:text-xs font-heading uppercase tracking-[0.3em] text-surface/60 bg-surface-dark/20 backdrop-blur-sm shadow-sm">
             <div className="w-6 h-6 flex items-center justify-center bg-accent rounded-full text-primary shadow-[0_0_10px_rgba(255,77,0,0.5)]">
-              <Gamepad2 className="w-3.5 h-3.5" />
+              <GamepadSVG className="w-3.5 h-3.5" />
             </div>
             {data.name}
           </span>

@@ -9,10 +9,11 @@ export default function About({ data }: { data: AboutData }) {
     <section id="about" className="snap-section py-24 px-6 flex items-center">
       <div className="max-w-7xl mx-auto">
         <SectionHeader label="About" title="About Me" />
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <ScrollReveal direction="left">
-            <div className="relative aspect-[3/4] overflow-hidden rounded-2xl shadow-elevated group border border-surface/10 ring-1 ring-white/5">
-              <div className="absolute inset-0 bg-gradient-to-tr from-accent/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10 mix-blend-overlay blur-md"></div>
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start mt-12">
+          {/* Left Column: Big Image */}
+          <ScrollReveal direction="left" className="lg:col-span-5">
+            <div className="relative w-full aspect-[4/5] overflow-hidden rounded-[2rem] shadow-[15px_15px_0_rgba(255,77,0,1)] border-4 border-surface-dark group bg-surface-dark">
+              <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-10 mix-blend-overlay"></div>
               <Image
                 src={data.photo.url}
                 alt="Portrait"
@@ -20,64 +21,91 @@ export default function About({ data }: { data: AboutData }) {
                 className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
               />
             </div>
-          </ScrollReveal>
-          <ScrollReveal direction="right" delay={0.2}>
-            {data.name && (
-              <h3 className="font-heading text-5xl md:text-6xl mb-2 font-black bg-gradient-to-br from-white via-primary to-accent bg-clip-text text-transparent drop-shadow-sm">
-                {data.name}
-              </h3>
-            )}
-            {data.education && (
-              <div className="mb-6">
-                <h4 className="font-heading text-sm text-accent uppercase tracking-widest leading-none">
-                  {data.education}
-                </h4>
-                {data.educationDetail && (
-                  <p className="text-muted text-[13px] mt-2 uppercase tracking-wide">
-                    {data.educationDetail}
-                  </p>
-                )}
-              </div>
-            )}
-            <div className="prose prose-lg max-w-none text-muted">
-              {documentToReactComponents(data.bio)}
+            <div className="mt-12 flex justify-center">
+               <div className="px-6 py-2 border-2 border-surface-light rounded-sm -rotate-3 bg-primary text-surface font-heading font-extrabold uppercase tracking-widest text-sm shadow-md">
+                  Made by {data.name}
+               </div>
             </div>
-            {data.skills?.length > 0 && (
-              <div className="mt-8">
-                <h5 className="font-heading text-xs text-surface/50 uppercase tracking-widest mb-3">
-                  Skills & Expertise
-                </h5>
-                <div className="flex flex-wrap gap-2">
-                  {data.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-4 py-2 bg-surface-dark/40 backdrop-blur-md text-primary/90 text-xs font-heading font-bold uppercase tracking-wider border border-white/5 rounded-full shadow-sm hover:border-accent/50 hover:bg-surface-dark/60 hover:-translate-y-0.5 hover:shadow-accent/10 hover:text-white cursor-default transition-all duration-300 ease-out"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
-            
-            {data.software?.length > 0 && (
-              <div className="mt-6">
-                <h5 className="font-heading text-xs text-surface/50 uppercase tracking-widest mb-3">
-                  Software & Tools
-                </h5>
-                <div className="flex flex-wrap gap-2">
-                  {data.software.map((sw) => (
-                    <span
-                      key={sw}
-                      className="px-4 py-2 bg-surface/30 backdrop-blur-sm text-primary/80 text-xs font-heading font-bold uppercase tracking-wider border border-white/5 rounded-full hover:border-accent/30 hover:bg-surface/50 hover:-translate-y-0.5 transition-all duration-300 ease-out cursor-default"
-                    >
-                      {sw}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            )}
           </ScrollReveal>
+
+          {/* Right Column: Content Grid */}
+          <div className="lg:col-span-7 flex flex-col gap-10 lg:gap-14">
+            <ScrollReveal direction="right" delay={0.1}>
+               <h3 className="font-heading text-5xl md:text-6xl lg:text-7xl font-black text-surface tracking-tight leading-none">
+                  Hi! I'm <span className="text-accent">{data.name}</span>
+               </h3>
+            </ScrollReveal>
+
+             {/* Sub-grid for Bio and Info */}
+            <div className="grid md:grid-cols-2 gap-10">
+               {/* Left Sub-column: Bio */}
+               <ScrollReveal direction="up" delay={0.2}>
+                  <div className="prose prose-lg prose-invert text-surface/80 leading-relaxed max-w-none font-medium">
+                    {documentToReactComponents(data.bio)}
+                  </div>
+               </ScrollReveal>
+
+               {/* Right Sub-column: Info Blocks */}
+               <ScrollReveal direction="up" delay={0.3}>
+                  <div className="space-y-10 flex flex-col">
+                    
+                    {/* Education */}
+                    {data.education && (
+                       <div>
+                          <h4 className="font-heading text-xl font-bold text-surface mb-2 flex items-center gap-2">
+                             Education
+                             <span className="text-[10px] bg-accent/20 text-accent px-2 py-0.5 rounded font-black tracking-widest uppercase">EDU</span>
+                          </h4>
+                          <p className="text-accent font-bold font-heading text-lg leading-tight uppercase tracking-wider">
+                             {data.education}
+                          </p>
+                          {data.educationDetail && (
+                             <p className="text-surface/60 text-sm mt-1 uppercase tracking-wider font-semibold">
+                                {data.educationDetail}
+                             </p>
+                          )}
+                       </div>
+                    )}
+
+                    {/* Focus / Skills */}
+                    {data.skills?.length > 0 && (
+                       <div>
+                          <h4 className="font-heading text-xl font-bold text-surface mb-3 flex items-center gap-2">
+                             Focus
+                             <span className="text-[10px] bg-surface-dark text-surface/50 px-2 py-0.5 rounded font-black tracking-widest uppercase">SKILLS</span>
+                          </h4>
+                          <ul className="space-y-2">
+                             {data.skills.map((skill) => (
+                                <li key={skill} className="flex items-center gap-3 text-surface/80 text-sm font-semibold uppercase tracking-wider">
+                                   <div className="w-1.5 h-1.5 bg-accent rounded-[1px] rotate-45"></div>
+                                   {skill}
+                                </li>
+                             ))}
+                          </ul>
+                       </div>
+                    )}
+
+                    {/* Tools / Software */}
+                    {data.software?.length > 0 && (
+                       <div>
+                          <h4 className="font-heading text-xl font-bold text-surface mb-3 flex items-center gap-2">
+                             Tools
+                             <span className="text-[10px] bg-surface-dark text-surface/50 px-2 py-0.5 rounded font-black tracking-widest uppercase">APP</span>
+                          </h4>
+                          <div className="flex flex-wrap gap-2">
+                             {data.software.map((sw) => (
+                                <span key={sw} className="px-3 py-1.5 bg-surface-dark text-surface text-[11px] font-heading font-extrabold uppercase tracking-widest border border-white/5 rounded-md hover:border-accent/50 hover:text-accent transition-colors">
+                                   {sw}
+                                </span>
+                             ))}
+                          </div>
+                       </div>
+                    )}
+                    
+                  </div>
+               </ScrollReveal>
+            </div>
+          </div>
         </div>
       </div>
     </section>
