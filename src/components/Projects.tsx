@@ -5,6 +5,7 @@ import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import type { Project } from "@/lib/types";
 import VideoPlayer from "./VideoPlayer";
+import { motion } from "framer-motion";
 
 function isVideo(contentType: string) {
   return contentType.startsWith("video/");
@@ -116,8 +117,16 @@ export default function Projects({ projects }: { projects: Project[] }) {
     { slug: "ueh", title: "UEH", localIcon: "/appIcon/ueh.jpg" },
   ] as const;
 
+  const brandLogos = BRAND_SECTIONS.map((brand) => {
+    const brandProjects = projects.filter(
+      (project) => normalizeBrandSlug(project.category) === brand.slug
+    );
+    return brandProjects[0]?.appIcon?.url || brand.localIcon;
+  });
+
   return (
-    <section id="branding" className="snap-section relative overflow-y-auto bg-surface-dark py-16 lg:py-20">
+    <section id="branding" className="snap-section relative overflow-hidden bg-surface-dark py-16 lg:py-24">
+      {/* Background Dots */}
       <div
         className="absolute inset-0 opacity-[0.05] pointer-events-none"
         style={{
@@ -126,15 +135,76 @@ export default function Projects({ projects }: { projects: Project[] }) {
           backgroundSize: "40px 40px",
         }}
       />
-
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
-        <div className="mb-8">
-          <p className="text-accent text-[10px] uppercase tracking-[0.2em] font-black mb-2">
-            Branding
-          </p>
-          <h2 className="font-heading text-surface text-3xl md:text-4xl lg:text-5xl font-black uppercase tracking-tight">
-            Project List
-          </h2>
+        
+        {/* HUGE BRANDING BANNER */}
+        <div className="relative w-full py-24 lg:py-40 flex items-center justify-center mb-20 lg:mb-24 rounded-[3rem] bg-accent overflow-hidden select-none shadow-2xl border-4 border-surface/10">
+          {/* Subtle grid background inside banner */}
+          <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "linear-gradient(rgba(28,25,23,1) 1px, transparent 1px), linear-gradient(90deg, rgba(28,25,23,1) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+          
+          {/* Floating app icons */}
+          {brandLogos.map((src, i) => {
+            const positions = [
+              { top: '10%', left: '8%' },
+              { bottom: '15%', left: '20%' },
+              { top: '15%', right: '10%' },
+              { bottom: '12%', right: '20%' },
+            ];
+            const angles = [-15, 20, 10, -25];
+            const delay = [0, 0.4, 0.2, 0.6];
+            return (
+              <motion.div
+                key={`floating-icon-${i}`}
+                className="absolute z-0 w-20 h-20 md:w-28 md:h-28 lg:w-40 lg:h-40 rounded-[2rem] overflow-hidden shadow-2xl border-[4px] border-primary bg-primary"
+                initial={{ opacity: 0, scale: 0.5, rotate: angles[i] - 15 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: angles[i] }}
+                viewport={{ once: true }}
+                animate={{ y: [0, -20, 0] }}
+                transition={{ 
+                  y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: delay[i] },
+                  opacity: { duration: 0.6, delay: 0.2 },
+                  scale: { type: "spring", delay: 0.2 },
+                  rotate: { type: "spring", delay: 0.2 }
+                }}
+                style={positions[i]}
+              >
+                <Image src={src} fill alt="Brand icon" className="object-cover" />
+              </motion.div>
+            );
+          })}
+
+          {/* Elegant Text Container */}
+          <motion.div 
+            initial={{ scale: 0.9, y: 20, opacity: 0 }}
+            whileInView={{ scale: 1, y: 0, opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ type: "spring", stiffness: 100, damping: 20 }}
+            className="relative z-10 flex flex-col items-center justify-center p-8 pointer-events-none"
+          >
+            {/* Tag/Badge */}
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="mb-6 bg-primary text-accent px-6 py-2 rounded-full text-xs lg:text-sm font-black uppercase tracking-[0.2em] shadow-xl"
+            >
+              Project List
+            </motion.div>
+
+            <h2 className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black tracking-tight text-primary text-center uppercase leading-[0.9]"
+                style={{
+                  textShadow: "4px 4px 0px rgba(0,0,0,0.15)"
+                }}
+            >
+              BRANDING
+            </h2>
+            
+            <div className="mt-6 lg:mt-8">
+              <p className="text-surface font-black tracking-[0.3em] lg:tracking-[0.4em] uppercase text-sm md:text-xl lg:text-3xl drop-shadow-md text-center">
+                Brand Marketing
+              </p>
+            </div>
+          </motion.div>
         </div>
 
         <div className="space-y-3">

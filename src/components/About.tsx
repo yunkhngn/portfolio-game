@@ -57,10 +57,6 @@ export default function About({ data }: { data: AboutData }) {
                 className="object-cover transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]"
               />
             </div>
-            {/* Stamp / Label */}
-            <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 px-6 py-2 border-2 border-primary rounded-sm -rotate-3 bg-primary text-surface font-heading font-extrabold uppercase tracking-widest text-sm shadow-xl whitespace-nowrap z-20">
-               Made by {data.name}
-            </div>
           </ScrollReveal>
 
           {/* Right Column: Content Grid */}
