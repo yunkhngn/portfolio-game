@@ -48,24 +48,21 @@ export default function Experience({ items }: { items: ExperienceData[] }) {
                 direction="up"
               >
                 <div className="relative pl-[96px] md:pl-[128px]">
-                  {/* Outer circle glowing dot */}
-                  <div className="absolute left-[24px] md:left-[32px] top-[24px] w-2.5 h-2.5 rounded-full bg-accent -translate-x-1/2 shadow-[0_0_15px_rgba(255,77,0,1)] ring-[6px] ring-surface-dark z-10" />
-                  <div className="absolute left-[24px] md:left-[32px] top-0 bottom-0 -translate-x-1/2 z-10">
-                    <div className="relative h-full aspect-square rounded-xl overflow-hidden border border-white/20 bg-black/40 shadow-[0_8px_20px_rgba(0,0,0,0.35)]">
-                      {exp.appIcon ? (
+                  {/* Outer circle glowing dot OR appIcon */}
+                  <div className="absolute left-[24px] md:left-[32px] top-[16px] md:top-[12px] -translate-x-1/2 z-10 flex items-center justify-center">
+                    {exp.appIcon ? (
+                      <div className="relative w-14 h-14 md:w-20 md:h-20 rounded-[14px] md:rounded-2xl overflow-hidden border border-white/20 bg-surface shadow-[0_8px_20px_rgba(0,0,0,0.5)]">
                         <Image
                           src={exp.appIcon.url}
                           alt={`${exp.company} logo`}
                           fill
-                          sizes="(max-width: 768px) 120px, 160px"
+                          sizes="(max-width: 768px) 56px, 80px"
                           className="object-cover"
                         />
-                      ) : (
-                        <div className="h-full w-full flex items-center justify-center text-[10px] font-black text-surface/70">
-                          {exp.company.slice(0, 2).toUpperCase()}
-                        </div>
-                      )}
-                    </div>
+                      </div>
+                    ) : (
+                      <div className="w-3 h-3 rounded-full bg-accent shadow-[0_0_15px_rgba(255,77,0,1)] ring-[6px] ring-surface-dark" />
+                    )}
                   </div>
 
                   <div className="group relative bg-white/[0.02] border-[2px] border-white/5 rounded-2xl p-6 md:p-8 hover:border-accent/40 transition-all duration-300 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_50px_rgba(255,77,0,0.15)]">

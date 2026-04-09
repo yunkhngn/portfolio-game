@@ -5,6 +5,7 @@ export interface SiteConfig {
   title: string;
   tagline: string;
   email: string;
+  pdfLink?: string;
   socialLinks: { platform: string; url: string; icon: string }[];
 }
 

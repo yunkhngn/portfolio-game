@@ -6,13 +6,6 @@ import type { SiteConfig } from "@/lib/types";
 import ScrollReveal from "./ScrollReveal";
 
 export default function Contact({ config, avatarUrl }: { config: SiteConfig; avatarUrl: string }) {
-  const appIcons = [
-    { src: "/appIcon/crossfire.png", alt: "Crossfire", rotate: -15, offset: -70, zIndex: 10 },
-    { src: "/appIcon/tam-quoc.webp", alt: "Tam Quoc", rotate: -5, offset: -25, zIndex: 20 },
-    { src: "/appIcon/danh-tuong.png", alt: "Danh Tuong", rotate: 6, offset: 20, zIndex: 30 },
-    { src: "/appIcon/ueh.jpg", alt: "Campaign", rotate: 16, offset: 70, zIndex: 40 },
-  ];
-
   return (
     <section id="contact" className="snap-section relative pt-20 pb-0 bg-black overflow-hidden flex flex-col justify-between min-h-screen">
       {/* Decorative Gradient Background */}
@@ -89,42 +82,90 @@ export default function Contact({ config, avatarUrl }: { config: SiteConfig; ava
 
         {/* Central Typography Lockup */}
         <ScrollReveal direction="up" className="relative z-20 text-center mb-16 scale-90 md:scale-100">
-          <div className="flex flex-col items-center justify-center -space-y-4 md:-space-y-6">
+          <div className="flex flex-col items-center justify-center -space-y-4 md:-space-y-6 select-none">
              <h2 className="text-surface font-serif italic text-4xl md:text-6xl lg:text-[75px] self-start md:ml-10 tracking-tight">
                 Let&apos;s
              </h2>
-             <h2 
-               className="text-accent font-heading font-black uppercase tracking-tighter drop-shadow-2xl text-[14vw] md:text-[min(12vw,180px)] leading-[0.8]"
-               style={{ WebkitTextStroke: "2px rgba(255, 77, 0, 0.2)" }}
-             >
-                creative
-             </h2>
+             <div className="flex text-accent font-heading font-black uppercase tracking-tighter drop-shadow-2xl text-[14vw] md:text-[min(12vw,180px)] leading-[0.8]">
+                {"creative".split("").map((char, index) => (
+                  <motion.span
+                    key={index}
+                    whileHover={{ y: -30, color: "#ffffff", scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="inline-block cursor-default [-webkit-text-stroke:2px_rgba(255,77,0,0.2)] hover:[-webkit-text-stroke:2px_transparent]"
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+             </div>
              <h2 className="text-surface font-serif italic text-4xl md:text-6xl lg:text-[75px] self-end md:-mr-10 tracking-tight">
                 together
              </h2>
           </div>
         </ScrollReveal>
 
-        {/* Game App Icon Cluster */}
-        <ScrollReveal direction="up" delay={0.2} className="relative w-full h-[120px] md:h-[180px] flex justify-center items-center mt-10">
-           <div className="relative w-[280px] md:w-[400px] h-full flex justify-center">
-             {appIcons.map((icon, i) => (
+        {/* Game App Icon Cluster & Contact Button — fan arc + CTA sitting slightly low */}
+        <ScrollReveal direction="up" delay={0.2} className="relative w-full h-[190px] sm:h-[210px] md:h-[270px] flex justify-center items-center mt-16 md:mt-20">
+           <div className="relative w-[min(100%,380px)] sm:w-[420px] md:w-[640px] h-full flex justify-center">
+             {[
+               { src: "/appIcon/crossfire.png", alt: "Crossfire", rotate: -16, offset: -98, mdOffset: -168, zIndex: 10, yOffset: 26 },
+               { src: "/appIcon/tam-quoc.webp", alt: "Tam Quoc", rotate: -5, offset: -36, mdOffset: -58, zIndex: 20, yOffset: -14 },
+               { src: "/appIcon/danh-tuong.png", alt: "Danh Tuong", rotate: 5, offset: 36, mdOffset: 58, zIndex: 30, yOffset: -14 },
+               { src: "/appIcon/ueh.jpg", alt: "UEH", rotate: 16, offset: 98, mdOffset: 168, zIndex: 40, yOffset: 26 },
+             ].map((icon, i) => (
                 <motion.div
                   key={i}
-                  className="absolute bottom-0 w-[90px] h-[90px] md:w-[130px] md:h-[130px] rounded-[22px] md:rounded-[32px] overflow-hidden border border-surface/20 shadow-2xl origin-bottom cursor-pointer group"
+                  className="absolute top-[42%] md:top-[40%] w-[76px] h-[76px] sm:w-[86px] sm:h-[86px] md:w-[118px] md:h-[118px] rounded-[20px] sm:rounded-[22px] md:rounded-[28px] overflow-hidden cursor-pointer bg-black/50 ring-1 ring-white/[0.12] shadow-[0_10px_28px_rgba(0,0,0,0.45),0_1px_0_rgba(255,255,255,0.06)_inset]"
                   style={{
-                     x: `calc(-50% + ${icon.offset}px)`,
-                     left: '50%',
-                     rotate: icon.rotate,
-                     zIndex: icon.zIndex
+                     left: "50%",
+                     zIndex: icon.zIndex,
                   }}
-                  whileHover={{ y: -30, rotate: 0, zIndex: 100, scale: 1.15 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  initial={{
+                    x: `calc(-50% + ${icon.offset}px)`,
+                    y: `calc(-50% + ${icon.yOffset}px)`,
+                    rotate: icon.rotate,
+                    opacity: 0.85,
+                  }}
+                  whileInView={{
+                    x: [`calc(-50% + ${icon.offset}px)`, `calc(-50% + ${icon.mdOffset}px)`],
+                    opacity: 1,
+                  }}
+                  whileHover={{
+                    y: `calc(-50% + ${icon.yOffset - 14}px)`,
+                    rotate: 0,
+                    scale: 1.08,
+                    zIndex: 50,
+                  }}
+                  transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                  viewport={{ once: true }}
                 >
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity z-10 duration-300"></div>
-                  <Image src={icon.src} alt={icon.alt} fill className="object-cover w-full h-full transition-transform duration-500 group-hover:scale-110" />
+                  <Image
+                    src={icon.src}
+                    alt={icon.alt}
+                    fill
+                    sizes="(max-width: 768px) 86px, 118px"
+                    className="object-contain p-1.5 sm:p-2 pointer-events-none"
+                  />
                 </motion.div>
              ))}
+
+             <a
+                href={config.pdfLink || "#"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute z-[100] left-1/2 top-[58%] md:top-[56%] -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-b from-accent-light to-accent px-5 py-2.5 sm:px-7 sm:py-3 md:px-9 md:py-3.5 font-heading text-[10px] sm:text-[11px] md:text-xs font-black uppercase tracking-[0.22em] text-surface shadow-[0_14px_36px_-6px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.14)_inset] ring-2 ring-white/10 backdrop-blur-[2px] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_18px_44px_-8px_rgba(192,89,59,0.55),0_0_0_1px_rgba(255,255,255,0.2)_inset] hover:ring-white/20 active:scale-[0.98] whitespace-nowrap group"
+             >
+                Contact me now
+                <svg
+                  className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-90 transition-transform duration-300 group-hover:translate-x-0.5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  aria-hidden
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+             </a>
            </div>
         </ScrollReveal>
 

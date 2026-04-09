@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 import type { Project } from "@/lib/types";
 import VideoPlayer from "./VideoPlayer";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate, useInView } from "framer-motion";
 
 function isVideo(contentType: string) {
   return contentType.startsWith("video/");
@@ -74,6 +74,35 @@ function MediaCard({ item }: { item: DisplayMediaItem }) {
   );
 }
 
+function CountUp({ text }: { text: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.5 });
+
+  const match = text.match(/^([^\d]*)([\d.]+)(.*)$/);
+  const prefix = match ? match[1] : "";
+  const numericString = match ? match[2] : null;
+  const suffix = match ? match[3] : text;
+  const numberPart = numericString ? parseFloat(numericString) : null;
+
+  const count = useMotionValue(0);
+  const display = useTransform(count, (latest) => {
+    if (numericString && numericString.includes(".")) {
+      return prefix + latest.toFixed(1) + suffix;
+    }
+    return prefix + Math.floor(latest) + suffix;
+  });
+
+  useEffect(() => {
+    if (isInView && numberPart !== null) {
+      const controls = animate(count, numberPart, { duration: 2, ease: "easeOut" });
+      return controls.stop;
+    }
+  }, [isInView, numberPart, count]);
+
+  if (numberPart === null) return <>{text}</>;
+  return <motion.span ref={ref}>{display}</motion.span>;
+}
+
 function MetricsBar({
   metrics,
 }: {
@@ -90,7 +119,7 @@ function MetricsBar({
             className="rounded-lg border border-white/10 bg-white/[0.02] px-3 py-3 transition-all hover:border-accent/60 hover:bg-accent/10"
           >
             <p className="font-heading text-surface text-2xl lg:text-3xl font-black leading-none">
-              {metric.value}
+              <CountUp text={metric.value} />
             </p>
             <p className="mt-1 text-[10px] lg:text-[11px] uppercase tracking-[0.18em] text-surface/65 font-bold">
               {metric.label}
@@ -138,28 +167,30 @@ export default function Projects({ projects }: { projects: Project[] }) {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
         
         {/* HUGE BRANDING BANNER */}
-        <div className="relative w-full py-24 lg:py-40 flex items-center justify-center mb-20 lg:mb-24 rounded-[3rem] bg-accent overflow-hidden select-none shadow-2xl border-4 border-surface/10">
+        <div className="relative w-full py-16 sm:py-20 lg:py-40 flex items-center justify-center mb-16 lg:mb-24 rounded-[2rem] lg:rounded-[3rem] bg-accent overflow-hidden select-none shadow-2xl border-4 border-surface/10">
           {/* Subtle grid background inside banner */}
           <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "linear-gradient(rgba(28,25,23,1) 1px, transparent 1px), linear-gradient(90deg, rgba(28,25,23,1) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
           
           {/* Floating app icons */}
           {brandLogos.map((src, i) => {
             const positions = [
-              { top: '10%', left: '8%' },
-              { bottom: '15%', left: '20%' },
-              { top: '15%', right: '10%' },
-              { bottom: '12%', right: '20%' },
+              { top: "6%", left: "6%" },      // Crossfire
+              { top: "6%", right: "6%" },     // Tam Quoc
+              { bottom: "10%", left: "10%" }, // Danh Tuong
+              { bottom: "10%", right: "10%" }, // UEH
             ];
-            const angles = [-15, 20, 10, -25];
+            const angles = [-15, 12, -18, 20];
             const delay = [0, 0.4, 0.2, 0.6];
             return (
               <motion.div
                 key={`floating-icon-${i}`}
-                className="absolute z-0 w-20 h-20 md:w-28 md:h-28 lg:w-40 lg:h-40 rounded-[2rem] overflow-hidden shadow-2xl border-[4px] border-primary bg-primary"
+                className={`absolute w-16 h-16 sm:w-20 sm:h-20 md:w-32 md:h-32 lg:w-44 lg:h-44 rounded-xl md:rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden shadow-2xl border-4 md:border-[10px] border-[#1C1A19] bg-[#1C1A19] z-0 ${
+                  i >= 2 ? "hidden sm:block" : ""
+                }`}
                 initial={{ opacity: 0, scale: 0.5, rotate: angles[i] - 15 }}
                 whileInView={{ opacity: 1, scale: 1, rotate: angles[i] }}
                 viewport={{ once: true }}
-                animate={{ y: [0, -20, 0] }}
+                animate={{ y: [0, -10, 0] }}
                 transition={{ 
                   y: { duration: 5, repeat: Infinity, ease: "easeInOut", delay: delay[i] },
                   opacity: { duration: 0.6, delay: 0.2 },
@@ -179,28 +210,28 @@ export default function Projects({ projects }: { projects: Project[] }) {
             whileInView={{ scale: 1, y: 0, opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ type: "spring", stiffness: 100, damping: 20 }}
-            className="relative z-10 flex flex-col items-center justify-center p-8 pointer-events-none"
+            className="relative z-10 flex flex-col items-center justify-center p-4 md:p-8 pointer-events-none"
           >
             {/* Tag/Badge */}
             <motion.div 
               initial={{ opacity: 0, y: -10 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="mb-6 bg-primary text-accent px-6 py-2 rounded-full text-xs lg:text-sm font-black uppercase tracking-[0.2em] shadow-xl"
+              className="mb-4 md:mb-6 bg-[#1C1A19] text-accent px-4 md:px-6 py-1.5 md:py-2.5 rounded-full text-[10px] md:text-xs lg:text-sm font-black uppercase tracking-[0.25em] shadow-xl"
             >
               Project List
             </motion.div>
 
-            <h2 className="font-heading text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] font-black tracking-tight text-primary text-center uppercase leading-[0.9]"
+            <h2 className="font-heading text-6xl sm:text-7xl md:text-[8rem] lg:text-[10rem] font-black tracking-tight text-[#1C1A19] text-center uppercase leading-[0.8]"
                 style={{
-                  textShadow: "4px 4px 0px rgba(0,0,0,0.15)"
+                  textShadow: "6px 6px 0px rgba(0,0,0,0.15)"
                 }}
             >
               BRANDING
             </h2>
             
-            <div className="mt-6 lg:mt-8">
-              <p className="text-surface font-black tracking-[0.3em] lg:tracking-[0.4em] uppercase text-sm md:text-xl lg:text-3xl drop-shadow-md text-center">
+            <div className="mt-8 md:mt-10 lg:mt-12">
+              <p className="text-white font-heading font-black tracking-[0.4em] md:tracking-[0.6em] uppercase text-xs sm:text-sm md:text-xl lg:text-2xl drop-shadow-md text-center">
                 Brand Marketing
               </p>
             </div>
@@ -229,7 +260,7 @@ export default function Projects({ projects }: { projects: Project[] }) {
                       alt={`${brand.title} app icon`}
                       fill
                       sizes="80px"
-                      className="object-cover"
+                      className="object-contain p-2"
                     />
                   </div>
 
