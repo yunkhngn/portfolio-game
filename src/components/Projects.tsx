@@ -219,7 +219,7 @@ function ProjectSection({
 
 export default function Projects({ projects }: { projects: Project[] }) {
   return (
-    <div id="projects">
+    <div id="branding">
       {projects.map((project, i) => (
         <ProjectSection key={project.slug} project={project} index={i} />
       ))}

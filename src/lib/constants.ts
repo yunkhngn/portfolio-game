@@ -2,12 +2,10 @@ export const REVALIDATE_INTERVAL = 60;
 
 export const NAV_ITEMS = [
   { label: "Home", href: "#hero" },
-  { label: "About", href: "#about" },
-  { label: "Projects", href: "#projects" },
-  { label: "Services", href: "#services" },
-  { label: "Experience", href: "#experience" },
-  { label: "Achievement", href: "#achievement" },
-  { label: "Learn", href: "#learn" },
+  { label: "About Me", href: "#about" },
+  { label: "Branding", href: "#branding" },
+  { label: "My Journey", href: "#experience" },
+  { label: "What Drives Me", href: "#what-drives-me" },
   { label: "Contact", href: "#contact" },
 ] as const;
 

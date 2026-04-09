@@ -4,7 +4,7 @@ import ScrollReveal from "./ScrollReveal";
 
 export default function Motto() {
   return (
-    <section className="relative py-28 lg:py-40 bg-[#F5F4F0] overflow-hidden flex items-center">
+    <section id="what-drives-me" className="snap-section relative py-28 lg:py-40 bg-[#F5F4F0] overflow-hidden flex items-center min-h-screen">
       {/* Decorative diagonal lines */}
       <div
         className="absolute inset-0 opacity-[0.015] pointer-events-none"
