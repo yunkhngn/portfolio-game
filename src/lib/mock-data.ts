@@ -173,6 +173,7 @@ export const mockProjects: Project[] = [
     slug: "sword-chronicles-hero-launch",
     projectType: "Game",
     category: "Campaign",
+    appIcon: placeholder(128, 128, "SC"),
     situation: richText(
       "Supported the marketing campaign for the new hero Ton Thuong Huong SP release in Sword Chronicles: Awaken. Collaborated with Promotion and Design teams on landing page concept, minigame logic, reward structure, and CTA video clips. Highlight promotional content featuring Juky San cosplay achieved 1,500+ reactions. Landing page posts generated 1,000+ reactions on social media."
     ),
@@ -191,6 +192,7 @@ export const mockProjects: Project[] = [
     slug: "crossfire-legends-roadshow",
     projectType: "Outdoor",
     category: "OOH & Activation",
+    appIcon: placeholder(128, 128, "CF"),
     situation: richText(
       "Large-scale OOH and roadshow activation across Ho Chi Minh City for the Crossfire: Legends game launch. Planned visual concepts for LED OOH screens, coordinated deployment across 139-143 LED placements including Nguyen Hue Walking Street and Bach Dang Wharf. Executed roadshow across 11 locations with cosplay and mascot activations at Saigon Central Post Office and Thu Thiem Riverside Park. Achieved 125M total impressions and 50K user interactions."
     ),
@@ -209,6 +211,7 @@ export const mockProjects: Project[] = [
     slug: "crossfire-legends-megalive",
     projectType: "Clip",
     category: "Livestream Production",
+    appIcon: placeholder(128, 128, "CF"),
     situation: richText(
       "Managed a 7-day Megalive (56 hours) followed by a 23-day livestream series (46 hours) for the Crossfire: Legends launch. Developed KOL booking plan targeting entertainment creators to expand FPS audience. Worked on-site briefing hosts and KOLs, adjusting live content in real time. Coordinated with production house on timelines, in-stream codes, and visual overlays. Achieved 3.76M total views and 9.72M engagement interactions. Set a benchmark for Megalive formats in game marketing."
     ),
@@ -227,6 +230,7 @@ export const mockProjects: Project[] = [
     slug: "ueh-youth-festival-2024",
     projectType: "Outdoor",
     category: "Event Production",
+    appIcon: placeholder(128, 128, "UEH"),
     situation: richText(
       "Project leader for UEH's annual Youth Festival celebrating the 93rd anniversary of the Ho Chi Minh Communist Youth Union. Managed 13 booths recreating five world-famous streets and a concert night with 10 performances. Developed communication strategy, managed concert night script, collaborated with 5 departments on festival space design, and coordinated 3D LED stage visuals. Achieved 6,000+ attendees and 250,000 online reach."
     ),
@@ -251,6 +255,7 @@ export const mockProjects: Project[] = [
     slug: "noi-vong-tay-lon-2024",
     projectType: "Outdoor",
     category: "Event Production",
+    appIcon: placeholder(128, 128, "NVTL"),
     situation: richText(
       "Led project planning and execution for UEH's freshman welcome week — a large-scale multi-activity event. Developed content plans for booths, flashmob, sports events, and concert night. Supervised Technical Department during concert (LED systems, stage effects, artist coordination). Executed multi-channel communication across Facebook, Instagram, YouTube, TikTok, and community groups. Successfully delivered event with 8,000 attendees and 350,000 online reach."
     ),
@@ -275,6 +280,7 @@ export const mockProjects: Project[] = [
     slug: "vtv-hyundai-ecommerce",
     projectType: "Clip",
     category: "E-commerce & Content",
+    appIcon: placeholder(128, 128, "VTV"),
     situation: richText(
       "Three months operating an e-commerce platform at VTV-Hyundai, contributing to over 16 million VND in revenue. Produced SEO-optimized content with consistent brand logo placement. Ran Shopee ads driving significant traffic. Coordinated livestream production with MCs and KOCs for product reviews. Supported FMCG campaigns achieving 70%+ conversion rate and revenue growth within 2 months. Analyzed customer insights via Shopee dashboard for advertising optimization."
     ),

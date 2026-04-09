@@ -41,7 +41,49 @@ function parseAsset(asset: any, fallback: any = DEFAULT_PLACEHOLDER): any {
 
 function parseAssets(assets: any[]): Asset[] {
   const result = (assets || []).map((a) => parseAsset(a));
-  return result.length > 0 ? result : [DEFAULT_PLACEHOLDER];
+  return result.filter(Boolean);
+}
+
+function parseMetrics(input: any): { value: string; label: string }[] {
+  if (!input) return [];
+
+  const normalize = (item: any): { value: string; label: string } | null => {
+    if (!item) return null;
+    if (typeof item === "string") {
+      const [value, label] = item.split("|").map((part) => part?.trim());
+      if (value && label) return { value, label };
+      const parts = item.trim().split(/\s+/);
+      if (parts.length >= 2) {
+        return { value: parts[0], label: parts.slice(1).join(" ") };
+      }
+      return null;
+    }
+    if (typeof item === "object") {
+      const value = String(item.value ?? item.number ?? "").trim();
+      const label = String(item.label ?? item.title ?? "").trim();
+      if (!value || !label) return null;
+      return { value, label };
+    }
+    return null;
+  };
+
+  if (typeof input === "string") {
+    try {
+      const parsed = JSON.parse(input);
+      if (Array.isArray(parsed)) return parsed.map(normalize).filter(Boolean) as { value: string; label: string }[];
+    } catch {
+      return input
+        .split("\n")
+        .map((line) => normalize(line))
+        .filter(Boolean) as { value: string; label: string }[];
+    }
+  }
+
+  if (Array.isArray(input)) {
+    return input.map(normalize).filter(Boolean) as { value: string; label: string }[];
+  }
+
+  return [];
 }
 
 export async function getSiteConfig(): Promise<SiteConfig> {
@@ -108,9 +150,18 @@ export async function getProjects(): Promise<Project[]> {
     title: item.fields.title,
     slug: item.fields.slug,
     projectType: item.fields.projectType,
-    category: item.fields.category,
+    // Contentful brand taxonomy field (id: branding) is used for grouping.
+    // Keep fallback to category for backward compatibility.
+    category: item.fields.branding || item.fields.category || "",
+    branding: item.fields.branding || "",
+    appIcon: parseAsset(item.fields.appIcon, null),
     image1Title: item.fields.image1Title || "",
     image2Title: item.fields.image2Title || "",
+    image2: parseAsset(item.fields.image2, null),
+    image3: parseAsset(item.fields.image3, null),
+    image4: parseAsset(item.fields.image4, null),
+    video4: item.fields.video4 || "",
+    metrics: parseMetrics(item.fields.metric || item.fields.metrics || item.fields.resultsMetrics || item.fields.stats),
     situation: item.fields.situation || null,
     myScope: item.fields.myScope || null,
     whatIveDone: item.fields.whatIveDone || null,
@@ -118,7 +169,15 @@ export async function getProjects(): Promise<Project[]> {
     keyLearning: item.fields.keyLearning || null,
     tags: item.fields.tags || [],
     thumbnail: parseAsset(item.fields.thumbnail),
-    media: parseAssets(item.fields.media),
+    assets: parseAssets(item.fields.assets || []),
+    media: parseAssets(
+      [
+        ...(item.fields.media || []),
+        item.fields.image2,
+        item.fields.image3,
+        // image4 is deprecated in favor of video4 (YouTube link).
+      ].filter(Boolean)
+    ),
     heroVideo: parseAsset(item.fields.heroVideo, null),
     featured: item.fields.featured || false,
     year: item.fields.year,

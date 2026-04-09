@@ -48,9 +48,19 @@ export interface Project {
   slug: string;
   projectType: ProjectType;
   category: string;
+  branding?: string;
+  appIcon?: Asset | null;
   
   image1Title?: string;
   image2Title?: string;
+  image2?: Asset | null;
+  image3?: Asset | null;
+  image4?: Asset | null;
+  video4?: string;
+  metrics?: {
+    value: string;
+    label: string;
+  }[];
   situation?: Document;
   myScope?: Document;
   whatIveDone?: Document;
@@ -60,6 +70,7 @@ export interface Project {
   tags: string[];
   thumbnail: Asset;
   media: Asset[];
+  assets?: Asset[];
   heroVideo?: Asset;
   featured: boolean;
   year: number;
