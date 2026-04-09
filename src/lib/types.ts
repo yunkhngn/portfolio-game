@@ -87,6 +87,7 @@ export interface Service {
 export interface Experience {
   role: string;
   company: string;
+  appIcon?: Asset | null;
   startDate: string;
   endDate?: string;
   description: string;

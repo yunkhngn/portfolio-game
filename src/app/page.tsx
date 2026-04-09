@@ -13,6 +13,7 @@ import Motto from "@/components/Motto";
 import Experience from "@/components/Experience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import MarqueeBand from "@/components/MarqueeBand";
 
 export const revalidate = 60;
 
@@ -35,10 +36,11 @@ export default async function Home() {
     <main className="snap-container">
       <Hero data={hero} />
       <About data={about} />
+      <MarqueeBand />
       <Projects projects={projects} />
       <Experience items={experiences} />
       <Motto />
-      <Contact config={config} />
+      <Contact config={config} avatarUrl={about.photo.url} />
       <Footer />
     </main>
   );

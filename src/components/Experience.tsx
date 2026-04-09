@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Experience as ExperienceData } from "@/lib/types";
 import ScrollReveal from "./ScrollReveal";
 
@@ -33,6 +34,9 @@ export default function Experience({ items }: { items: ExperienceData[] }) {
         </ScrollReveal>
 
         <div className="relative mx-auto mt-10">
+          {/* Outer timeline line (far left) */}
+          <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/12 to-transparent" />
+
           {/* Main glowing timeline line - left edge */}
           <div className="absolute left-[24px] md:left-[32px] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/20 to-transparent" />
           
@@ -43,9 +47,26 @@ export default function Experience({ items }: { items: ExperienceData[] }) {
                 delay={i * 0.15}
                 direction="up"
               >
-                <div className="relative pl-[64px] md:pl-[80px]">
+                <div className="relative pl-[96px] md:pl-[128px]">
                   {/* Outer circle glowing dot */}
                   <div className="absolute left-[24px] md:left-[32px] top-[24px] w-2.5 h-2.5 rounded-full bg-accent -translate-x-1/2 shadow-[0_0_15px_rgba(255,77,0,1)] ring-[6px] ring-surface-dark z-10" />
+                  <div className="absolute left-[24px] md:left-[32px] top-0 bottom-0 -translate-x-1/2 z-10">
+                    <div className="relative h-full aspect-square rounded-xl overflow-hidden border border-white/20 bg-black/40 shadow-[0_8px_20px_rgba(0,0,0,0.35)]">
+                      {exp.appIcon ? (
+                        <Image
+                          src={exp.appIcon.url}
+                          alt={`${exp.company} logo`}
+                          fill
+                          sizes="(max-width: 768px) 120px, 160px"
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="h-full w-full flex items-center justify-center text-[10px] font-black text-surface/70">
+                          {exp.company.slice(0, 2).toUpperCase()}
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
                   <div className="group relative bg-white/[0.02] border-[2px] border-white/5 rounded-2xl p-6 md:p-8 hover:border-accent/40 transition-all duration-300 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:shadow-[0_20px_50px_rgba(255,77,0,0.15)]">
                     <div className="absolute -inset-0.5 bg-gradient-to-br from-accent/20 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl blur-xl transition-opacity duration-500 pointer-events-none -z-10"></div>

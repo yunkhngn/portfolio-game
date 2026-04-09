@@ -351,6 +351,7 @@ export const mockExperiences: Experience[] = [
   {
     role: "Brand Collaborator",
     company: "VNGGAMES",
+    appIcon: placeholder(160, 160, "VNG"),
     startDate: "2025-09-01",
     description:
       "Executing marketing campaigns for game launches including Sword Chronicles: Awaken and Crossfire: Legends. Managing landing pages, OOH roadshows, Megalive livestream production, and KOL coordination. Delivered 125M+ impressions and 3.76M+ livestream views.",
@@ -359,6 +360,7 @@ export const mockExperiences: Experience[] = [
   {
     role: "E-commerce Marketing Intern",
     company: "VTV-Hyundai",
+    appIcon: placeholder(160, 160, "VTV"),
     startDate: "2025-03-01",
     endDate: "2025-07-01",
     description:
@@ -368,6 +370,7 @@ export const mockExperiences: Experience[] = [
   {
     role: "Vice Head — Movement Department",
     company: "UEH Youth Union & Student Association",
+    appIcon: placeholder(160, 160, "UEH"),
     startDate: "2024-03-01",
     endDate: "2025-12-01",
     description:
@@ -377,6 +380,7 @@ export const mockExperiences: Experience[] = [
   {
     role: "E-commerce Marketing Student",
     company: "University of Economics HCMC (UEH)",
+    appIcon: placeholder(160, 160, "UEH"),
     startDate: "2022-09-01",
     endDate: "2026-04-01",
     description:

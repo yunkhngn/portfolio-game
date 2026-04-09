@@ -210,7 +210,15 @@ export async function getExperiences(): Promise<Experience[]> {
     order: ["-fields.order"] as any,
   });
   if (!entries.items.length) return [];
-  return entries.items.map((item: any) => item.fields as Experience);
+  return entries.items.map((item: any) => ({
+    role: item.fields.role || "",
+    company: item.fields.company || "",
+    appIcon: parseAsset(item.fields.appIcon, null),
+    startDate: item.fields.startDate || "",
+    endDate: item.fields.endDate || "",
+    description: item.fields.description || "",
+    order: item.fields.order || 0,
+  }));
 }
 
 

@@ -4,21 +4,21 @@ import { motion } from "framer-motion";
 
 const words = [
   "MARKETING",
-  "✦",
+  "+",
   "STRATEGY",
-  "✦",
+  "+",
   "CREATIVE",
-  "✦",
+  "+",
   "BRANDING",
-  "✦",
+  "+",
   "STORYTELLING",
-  "✦",
+  "+",
   "DIGITAL",
-  "✦",
+  "+",
   "CONTENT",
-  "✦",
+  "+",
   "CAMPAIGNS",
-  "✦",
+  "+",
 ];
 
 export default function MarqueeBand() {
@@ -44,7 +44,7 @@ export default function MarqueeBand() {
             <span
               key={i}
               className={`font-heading text-lg md:text-2xl font-black uppercase tracking-[0.2em] ${
-                word === "✦"
+                word === "+"
                   ? "text-white/40 text-sm"
                   : "text-white"
               }`}
