@@ -31,7 +31,7 @@ export default function Motto() {
         <ScrollReveal delay={0.15}>
           <blockquote className="font-heading text-3xl md:text-5xl lg:text-[3.5rem] font-black leading-[1.1] tracking-tight text-primary">
             &ldquo;Good marketing makes the company look smart.{" "}
-            <span className="text-accent">Great marketing</span> makes the
+            <span className="text-accent">Great marketing </span> makes the
             customer feel smart.&rdquo;
           </blockquote>
         </ScrollReveal>
