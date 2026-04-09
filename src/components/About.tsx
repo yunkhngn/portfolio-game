@@ -4,6 +4,33 @@ import type { AboutSection as AboutData } from "@/lib/types";
 import ScrollReveal from "./ScrollReveal";
 import SectionHeader from "./SectionHeader";
 
+const SOFTWARE_ICON_MAP: Record<string, string> = {
+  figma: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg",
+  photoshop: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/photoshop/photoshop-plain.svg",
+  illustrator:
+    "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/illustrator/illustrator-plain.svg",
+  premiere: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/premierepro/premierepro-plain.svg",
+  notion: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/notion/notion-original.svg",
+  jira: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jira/jira-original.svg",
+};
+
+function getSoftwareIconUrl(name: string): string | null {
+  const key = name.trim().toLowerCase();
+  if (key.includes("figma")) return SOFTWARE_ICON_MAP.figma;
+  if (key.includes("photoshop") || key === "ps") return SOFTWARE_ICON_MAP.photoshop;
+  if (key.includes("illustrator") || key === "ai") return SOFTWARE_ICON_MAP.illustrator;
+  if (key.includes("premiere") || key === "pr") return SOFTWARE_ICON_MAP.premiere;
+  if (key.includes("notion")) return SOFTWARE_ICON_MAP.notion;
+  if (key.includes("jira")) return SOFTWARE_ICON_MAP.jira;
+  return null;
+}
+
+const FIXED_TOOLS = [
+  { key: "photoshop", label: "Photoshop", short: "Ps" },
+  { key: "illustrator", label: "Illustrator", short: "Ai" },
+  { key: "figma", label: "Figma", short: "Figma" },
+] as const;
+
 export default function About({ data }: { data: AboutData }) {
   return (
     <section id="about" className="snap-section relative py-24 px-6 flex items-center overflow-hidden bg-surface">
@@ -93,19 +120,68 @@ export default function About({ data }: { data: AboutData }) {
                        </div>
                     )}
 
+                    {/* Short Experiences */}
+                    {data.experiences?.length ? (
+                      <div>
+                        <h4 className="font-heading text-xl font-bold text-primary mb-4 flex items-center gap-2">
+                          Experience
+                          <span className="text-[10px] bg-accent/20 text-accent px-2 py-0.5 rounded font-black tracking-widest uppercase">SHORT</span>
+                        </h4>
+                        <div className="space-y-3">
+                          {data.experiences.slice(0, 3).map((exp) => (
+                            <div
+                              key={`${exp.role}-${exp.company}`}
+                              className="rounded-lg border border-primary/15 bg-primary/5 px-3 py-2"
+                            >
+                              <p className="text-primary font-bold text-xs uppercase tracking-wider leading-tight">
+                                {exp.role}
+                              </p>
+                              <p className="text-accent font-heading font-extrabold text-[11px] uppercase tracking-wider">
+                                {exp.company}
+                              </p>
+                              {exp.period ? (
+                                <p className="text-primary/60 text-[10px] uppercase tracking-widest mt-0.5">
+                                  {exp.period}
+                                </p>
+                              ) : null}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ) : null}
+
                     {/* Tools / Software */}
-                    {data.software?.length > 0 && (
+                    {FIXED_TOOLS.length > 0 && (
                        <div>
                           <h4 className="font-heading text-xl font-bold text-primary mb-4 flex items-center gap-2">
                              Tools
                              <span className="text-[10px] bg-primary/10 text-primary/60 px-2 py-0.5 rounded font-black tracking-widest uppercase">APP</span>
                           </h4>
                           <div className="flex flex-wrap gap-2">
-                             {data.software.map((sw) => (
-                                <span key={sw} className="px-4 py-2 bg-primary text-surface text-[10px] sm:text-xs font-heading font-extrabold uppercase tracking-widest border-2 border-primary rounded-md shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg">
-                                   {sw}
-                                </span>
-                             ))}
+                             {FIXED_TOOLS.map((tool) => {
+                               const iconUrl = SOFTWARE_ICON_MAP[tool.key];
+
+                               return (
+                                 <div
+                                   key={tool.key}
+                                   title={tool.label}
+                                   aria-label={tool.label}
+                                   className="inline-flex items-center justify-center h-14 w-14 rounded-xl bg-[#001E36] shadow-sm transition-transform hover:-translate-y-1 hover:shadow-lg"
+                                 >
+                                   {tool.key === "figma" ? (
+                                     <img src={iconUrl} alt={`${tool.label} icon`} className="h-7 w-7 object-contain" />
+                                   ) : (
+                                     <span
+                                       className={`font-black tracking-tight leading-none ${
+                                         tool.key === "photoshop" ? "text-[#31A8FF] text-3xl" : "text-[#FF9A00] text-[30px]"
+                                       }`}
+                                     >
+                                       {tool.short}
+                                     </span>
+                                   )}
+                                 </div>
+                               );
+                             })}
                           </div>
                        </div>
                     )}

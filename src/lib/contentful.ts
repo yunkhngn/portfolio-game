@@ -93,6 +93,7 @@ export async function getAbout(): Promise<AboutSection> {
     photo: parseAsset(fields.photo),
     skills: fields.skills || [],
     software: fields.software || [],
+    experiences: fields.experiences || [],
   };
 }
 

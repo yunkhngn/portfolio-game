@@ -148,6 +148,23 @@ export const mockAbout: AboutSection = {
     "Notion",
     "Jira",
   ],
+  experiences: [
+    {
+      role: "Brand Collaborator",
+      company: "VNGGAMES",
+      period: "2025 - Present",
+    },
+    {
+      role: "E-commerce Marketing Intern",
+      company: "VTV-Hyundai",
+      period: "Mar 2025 - Jul 2025",
+    },
+    {
+      role: "Vice Head, Movement Department",
+      company: "UEH Youth Union",
+      period: "2024 - 2025",
+    },
+  ],
 };
 
 export const mockProjects: Project[] = [

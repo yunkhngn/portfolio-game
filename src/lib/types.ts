@@ -36,6 +36,11 @@ export interface AboutSection {
   photo: Asset;
   skills: string[];
   software: string[];
+  experiences?: {
+    role: string;
+    company: string;
+    period?: string;
+  }[];
 }
 
 export interface Project {
