@@ -131,7 +131,7 @@ export default function Contact({ config, avatarUrl }: { config: SiteConfig; ava
       </div>
 
       {/* Footer Contact bar */}
-      <div className="w-full relative z-30 bg-[#0A0A0A]/80 backdrop-blur-xl border-t border-surface/5 mt-auto">
+      <div className="w-full relative z-30 bg-black/80 backdrop-blur-xl border-t border-surface/5 mt-auto">
         <div className="max-w-[1400px] mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-6">
            
            {/* Author / Hire Badge */}
