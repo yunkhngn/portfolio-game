@@ -132,25 +132,17 @@ function MetricsBar({
 }
 
 function normalizeBrandSlug(category?: string): string {
-  const raw = category?.trim().toLowerCase() || "";
-  if (raw === "branding") return "crossfire-legends";
-  return raw;
+  return category?.trim().toLowerCase() || "";
 }
 
-export default function Projects({ projects }: { projects: Project[] }) {
+export default function Projects({ projects, brandSections }: { projects: Project[]; brandSections: any[] }) {
   const [openBrand, setOpenBrand] = useState<string | null>(null);
-  const BRAND_SECTIONS = [
-    { slug: "crossfire-legends", title: "Crossfire: Legends", localIcon: "/appIcon/crossfire.png" },
-    { slug: "tam-quoc-huyen-tuong", title: "Tam Quốc Huyền Tướng", localIcon: "/appIcon/tam-quoc.webp" },
-    { slug: "danh-tuong-3q", title: "Danh Tướng 3Q", localIcon: "/appIcon/danh-tuong.png" },
-    { slug: "ueh", title: "UEH", localIcon: "/appIcon/ueh.jpg" },
-  ] as const;
 
-  const brandLogos = BRAND_SECTIONS.map((brand) => {
+  const brandLogos = brandSections.map((brand) => {
     const brandProjects = projects.filter(
-      (project) => normalizeBrandSlug(project.category) === brand.slug
+      (project) => normalizeBrandSlug(project.category) === normalizeBrandSlug(brand.id)
     );
-    return brandProjects[0]?.appIcon?.url || brand.localIcon;
+    return brandProjects[0]?.appIcon?.url || brand.logo;
   });
 
   return (
@@ -227,37 +219,37 @@ export default function Projects({ projects }: { projects: Project[] }) {
                   textShadow: "6px 6px 0px rgba(0,0,0,0.15)"
                 }}
             >
-              BRANDING
+              PORTFOLIO
             </h2>
             
             <div className="mt-8 md:mt-10 lg:mt-12">
               <p className="text-white font-heading font-black tracking-[0.4em] md:tracking-[0.6em] uppercase text-xs sm:text-sm md:text-xl lg:text-2xl drop-shadow-md text-center">
-                Brand Marketing
+                Featured Projects
               </p>
             </div>
           </motion.div>
         </div>
 
         <div className="space-y-3">
-          {BRAND_SECTIONS.map((brand) => {
+          {brandSections.map((brand) => {
             const brandProjects = projects.filter(
-              (project) => normalizeBrandSlug(project.category) === brand.slug
+              (project) => normalizeBrandSlug(project.category) === normalizeBrandSlug(brand.id)
             );
             const brandIcon = brandProjects[0]?.appIcon;
-            const brandIconSrc = brandIcon?.url || brand.localIcon;
-            const isOpen = openBrand === brand.slug;
+            const brandIconSrc = brandIcon?.url || brand.logo;
+            const isOpen = openBrand === brand.id;
 
             return (
-              <article key={brand.slug} className="border border-white/10 rounded-xl bg-black/20 overflow-hidden">
+              <article key={brand.id} className="border border-white/10 rounded-xl bg-black/20 overflow-hidden">
                 <button
                   type="button"
-                  onClick={() => setOpenBrand((prev) => (prev === brand.slug ? null : brand.slug))}
+                  onClick={() => setOpenBrand((prev) => (prev === brand.id ? null : brand.id))}
                   className="w-full text-left px-4 lg:px-6 py-4 flex items-center gap-4 hover:bg-white/5 transition-colors"
                 >
                   <div className="h-20 w-20 shrink-0 rounded-2xl overflow-hidden border border-white/15 bg-black/40 relative">
                     <Image
                       src={brandIconSrc}
-                      alt={`${brand.title} app icon`}
+                      alt={`${brand.label} icon`}
                       fill
                       sizes="80px"
                       className="object-contain p-2"
@@ -267,14 +259,14 @@ export default function Projects({ projects }: { projects: Project[] }) {
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center flex-wrap gap-3 mb-1.5">
                       <span className="px-3 py-1 rounded-full border border-accent/30 text-accent text-[10px] uppercase tracking-[0.2em] font-black bg-accent/5">
-                        {brand.slug}
+                        {brand.label}
                       </span>
                       <span className="text-surface/40 text-[11px] font-bold uppercase tracking-widest">
                         {brandProjects.length} project{brandProjects.length > 1 ? "s" : ""}
                       </span>
                     </div>
                     <h3 className="font-heading text-surface uppercase tracking-tight leading-none text-2xl md:text-4xl font-black truncate">
-                      {brand.title}
+                      {brand.label}
                     </h3>
                   </div>
 

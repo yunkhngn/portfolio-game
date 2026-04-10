@@ -4,6 +4,9 @@ import {
   getAbout,
   getProjects,
   getExperiences,
+  getMarqueeItems,
+  getBrandSections,
+  getMotto,
 } from "@/lib/contentful";
 
 import Hero from "@/components/Hero";
@@ -24,24 +27,30 @@ export default async function Home() {
     about,
     projects,
     experiences,
+    marqueeItems,
+    brandSections,
+    motto,
   ] = await Promise.all([
     getSiteConfig(),
     getHero(),
     getAbout(),
     getProjects(),
     getExperiences(),
+    getMarqueeItems(),
+    getBrandSections(),
+    getMotto(),
   ]);
 
   return (
     <main>
       <Hero data={hero} />
       <About data={about} />
-      <MarqueeBand />
-      <Projects projects={projects} />
+      <MarqueeBand items={marqueeItems} />
+      <Projects projects={projects} brandSections={brandSections} />
       <Experience items={experiences} />
-      <Motto />
+      <Motto data={motto} />
       <Contact config={config} avatarUrl={about.photo.url} />
-      <Footer />
+      <Footer name={config.name} />
     </main>
   );
 }

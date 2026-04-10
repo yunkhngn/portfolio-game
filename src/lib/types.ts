@@ -7,6 +7,13 @@ export interface SiteConfig {
   email: string;
   pdfLink?: string;
   socialLinks: { platform: string; url: string; icon: string }[];
+  contactIcons?: { src: string; alt: string }[];
+}
+
+export interface BrandSection {
+  id: string;
+  label: string;
+  logo: string | null;
 }
 
 export type ProjectType = "Game" | "Clip" | "Outdoor";
@@ -129,4 +136,9 @@ export interface Asset {
   width?: number;
   height?: number;
   contentType: string;
+}
+
+export interface Motto {
+  quoteLines: { text: string; accent: boolean }[];
+  author: string;
 }

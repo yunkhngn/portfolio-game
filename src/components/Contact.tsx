@@ -67,7 +67,7 @@ export default function Contact({ config, avatarUrl }: { config: SiteConfig; ava
            {/* BRANDING NODE */}
            <div className="absolute top-[60px] left-[20px] -translate-x-1/2 -translate-y-1/2 rotate-[-5deg] pointer-events-auto">
               <div className="bg-surface/10 backdrop-blur-md border border-surface/20 text-surface/80 text-[10px] font-black uppercase tracking-[0.3em] py-1.5 px-4 rounded-full shadow-lg">
-                BRANDING
+                CREATIVE
               </div>
            </div>
            
@@ -75,7 +75,7 @@ export default function Contact({ config, avatarUrl }: { config: SiteConfig; ava
            <div className="absolute top-[130px] left-[200px] -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-surface/10 shadow-2xl relative group cursor-crosshair">
                <div className="absolute inset-0 bg-accent/20 z-10 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity"></div>
-               <Image src={avatarUrl} alt="Avatar" fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+               {avatarUrl && <Image src={avatarUrl} alt="Avatar" fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />}
              </div>
            </div>
         </ScrollReveal>
@@ -87,7 +87,7 @@ export default function Contact({ config, avatarUrl }: { config: SiteConfig; ava
                 Let&apos;s
              </h2>
              <div className="flex text-accent font-heading font-black uppercase tracking-tighter drop-shadow-2xl text-[14vw] md:text-[min(12vw,180px)] leading-[0.8]">
-                {"creative".split("").map((char, index) => (
+                {"create".split("").map((char, index) => (
                   <motion.span
                     key={index}
                     whileHover={{ y: -30, color: "#ffffff", scale: 1.1 }}
@@ -104,34 +104,35 @@ export default function Contact({ config, avatarUrl }: { config: SiteConfig; ava
           </div>
         </ScrollReveal>
 
-        {/* Game App Icon Cluster & Contact Button — fan arc + CTA sitting slightly low */}
+        {/* Brand/App Icon Cluster & Contact Button */}
         <ScrollReveal direction="up" delay={0.2} className="relative w-full h-[190px] sm:h-[210px] md:h-[270px] flex justify-center items-center mt-16 md:mt-20">
            <div className="relative w-[min(100%,380px)] sm:w-[420px] md:w-[640px] h-full flex justify-center">
-             {[
-               { src: "/appIcon/crossfire.png", alt: "Crossfire", rotate: -16, offset: -98, mdOffset: -168, zIndex: 10, yOffset: 26 },
-               { src: "/appIcon/tam-quoc.webp", alt: "Tam Quoc", rotate: -5, offset: -36, mdOffset: -58, zIndex: 20, yOffset: -14 },
-               { src: "/appIcon/danh-tuong.png", alt: "Danh Tuong", rotate: 5, offset: 36, mdOffset: 58, zIndex: 30, yOffset: -14 },
-               { src: "/appIcon/ueh.jpg", alt: "UEH", rotate: 16, offset: 98, mdOffset: 168, zIndex: 40, yOffset: 26 },
-             ].map((icon, i) => (
+             {(config.contactIcons || []).slice(0, 4).map((icon, i) => {
+               const offsets = [-98, -36, 36, 98];
+               const mdOffsets = [-168, -58, 58, 168];
+               const rotates = [-16, -5, 5, 16];
+               const yOffsets = [26, -14, -14, 26];
+               
+               return (
                 <motion.div
                   key={i}
                   className="absolute top-[42%] md:top-[40%] w-[76px] h-[76px] sm:w-[86px] sm:h-[86px] md:w-[118px] md:h-[118px] rounded-[20px] sm:rounded-[22px] md:rounded-[28px] overflow-hidden cursor-pointer bg-black/50 ring-1 ring-white/[0.12] shadow-[0_10px_28px_rgba(0,0,0,0.45),0_1px_0_rgba(255,255,255,0.06)_inset]"
                   style={{
                      left: "50%",
-                     zIndex: icon.zIndex,
+                     zIndex: (i + 1) * 10,
                   }}
                   initial={{
-                    x: `calc(-50% + ${icon.offset}px)`,
-                    y: `calc(-50% + ${icon.yOffset}px)`,
-                    rotate: icon.rotate,
+                    x: `calc(-50% + ${offsets[i]}px)`,
+                    y: `calc(-50% + ${yOffsets[i]}px)`,
+                    rotate: rotates[i],
                     opacity: 0.85,
                   }}
                   whileInView={{
-                    x: [`calc(-50% + ${icon.offset}px)`, `calc(-50% + ${icon.mdOffset}px)`],
+                    x: [`calc(-50% + ${offsets[i]}px)`, `calc(-50% + ${mdOffsets[i]}px)`],
                     opacity: 1,
                   }}
                   whileHover={{
-                    y: `calc(-50% + ${icon.yOffset - 14}px)`,
+                    y: `calc(-50% + ${yOffsets[i] - 14}px)`,
                     rotate: 0,
                     scale: 1.08,
                     zIndex: 50,
@@ -147,7 +148,8 @@ export default function Contact({ config, avatarUrl }: { config: SiteConfig; ava
                     className="object-contain p-1.5 sm:p-2 pointer-events-none"
                   />
                 </motion.div>
-             ))}
+               );
+             })}
 
              <a
                 href={config.pdfLink || "#"}
@@ -155,7 +157,7 @@ export default function Contact({ config, avatarUrl }: { config: SiteConfig; ava
                 rel="noopener noreferrer"
                 className="absolute z-[100] left-1/2 top-[58%] md:top-[56%] -translate-x-1/2 -translate-y-1/2 inline-flex items-center gap-2.5 rounded-full bg-gradient-to-b from-accent-light to-accent px-5 py-2.5 sm:px-7 sm:py-3 md:px-9 md:py-3.5 font-heading text-[10px] sm:text-[11px] md:text-xs font-black uppercase tracking-[0.22em] text-surface shadow-[0_14px_36px_-6px_rgba(0,0,0,0.55),0_0_0_1px_rgba(255,255,255,0.14)_inset] ring-2 ring-white/10 backdrop-blur-[2px] transition-all duration-300 hover:scale-[1.04] hover:shadow-[0_18px_44px_-8px_rgba(192,89,59,0.55),0_0_0_1px_rgba(255,255,255,0.2)_inset] hover:ring-white/20 active:scale-[0.98] whitespace-nowrap group"
              >
-                Contact me now
+                Get my resume
                 <svg
                   className="w-3.5 h-3.5 sm:w-4 sm:h-4 opacity-90 transition-transform duration-300 group-hover:translate-x-0.5"
                   fill="none"

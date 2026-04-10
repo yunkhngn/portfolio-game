@@ -1,29 +1,10 @@
-"use client";
-
 import { motion } from "framer-motion";
+import type { MarqueeItem } from "@/lib/types";
 
-const words = [
-  "MARKETING",
-  "+",
-  "STRATEGY",
-  "+",
-  "CREATIVE",
-  "+",
-  "BRANDING",
-  "+",
-  "STORYTELLING",
-  "+",
-  "DIGITAL",
-  "+",
-  "CONTENT",
-  "+",
-  "CAMPAIGNS",
-  "+",
-];
-
-export default function MarqueeBand() {
-  // Double the array for seamless loop
-  const items = [...words, ...words];
+export default function MarqueeBand({ items }: { items: MarqueeItem[] }) {
+  // Add separators and double the array for seamless loop
+  const displayItems = items.flatMap(item => [item.text, "+"]);
+  const fullItemsPath = [...displayItems, ...displayItems];
 
   return (
     <section className="relative py-8 bg-accent overflow-hidden select-none">
@@ -35,12 +16,12 @@ export default function MarqueeBand() {
             x: {
               repeat: Infinity,
               repeatType: "loop",
-              duration: 20,
+              duration: 30,
               ease: "linear",
             },
           }}
         >
-          {items.map((word, i) => (
+          {fullItemsPath.map((word, i) => (
             <span
               key={i}
               className={`font-heading text-lg md:text-2xl font-black uppercase tracking-[0.2em] ${

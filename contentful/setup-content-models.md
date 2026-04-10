@@ -123,3 +123,24 @@ Create the following content models in your Contentful space. Use exact field ID
 | `description` | Rich text    | Yes      | Bullet points describing learnings       |
 | `media1`      | Media        | Yes      | The first image                          |
 | `media2`      | Media        | Yes      | The second image                         |
+
+---
+
+## 10. BrandSection
+
+| Field ID | Type       | Required | Notes                                    |
+|----------|------------|----------|------------------------------------------|
+| `id`     | Short text | Yes      | Unique identifier (e.g. "brand1")        |
+| `label`  | Short text | Yes      | Display name (e.g. "GLOBAL TECH")        |
+| `logo`   | Media      | No       | Brand logo / icon image                  |
+| `order`  | Integer    | Yes      | Sort order                               |
+
+---
+
+## 11. Motto
+
+| Field ID     | Type | Required | Notes                                               |
+|--------------|------|----------|-----------------------------------------------------|
+| `quoteLines` | JSON | Yes      | Array of `{ text, accent }` (e.g. `[{"text": "Quote", "accent": false}]`) |
+| `author`     | Short text | Yes| The author of the quote                             |
+

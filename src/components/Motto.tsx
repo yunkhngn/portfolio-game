@@ -1,13 +1,6 @@
-"use client";
-
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
-
-const quoteLines = [
-  { text: "“Good marketing makes the company look smart.", accent: false },
-  { text: " Great marketing", accent: true },
-  { text: " makes the customer feel smart.”", accent: false },
-];
+import type { Motto as MottoType } from "@/lib/types";
 
 const containerVariants = {
   hidden: { opacity: 1 },
@@ -29,7 +22,7 @@ const charVariants = {
   },
 };
 
-export default function Motto() {
+export default function Motto({ data }: { data: MottoType }) {
   return (
     <section className="snap-section relative py-20 lg:py-32 bg-[#F5F4F0] overflow-hidden flex items-center min-h-[70vh] lg:min-h-screen">
       {/* Decorative diagonal lines */}
@@ -41,11 +34,6 @@ export default function Motto() {
         }}
       />
 
-      {/* Giant decorative number */}
-      <div className="absolute -left-10 top-1/2 -translate-y-1/2 font-heading text-[300px] lg:text-[500px] font-black text-primary/[0.02] leading-none select-none pointer-events-none">
-        &amp;
-      </div>
-
       <div className="max-w-[1100px] mx-auto px-6 lg:px-10 relative z-10 w-full text-center">
         
         <motion.blockquote
@@ -55,7 +43,7 @@ export default function Motto() {
           viewport={{ once: true, amount: 0.5 }}
           className="font-heading text-3xl md:text-5xl lg:text-[3.5rem] font-black leading-[1.2] tracking-tight text-primary whitespace-pre-wrap"
         >
-          {quoteLines.map((line, lineIndex) => (
+          {data.quoteLines.map((line, lineIndex) => (
             <span key={lineIndex} className={line.accent ? "text-accent" : ""}>
               {line.text.split("").map((char, charIndex) => (
                 <motion.span key={charIndex} variants={charVariants}>
@@ -70,7 +58,7 @@ export default function Motto() {
           <div className="mt-10 flex items-center justify-center gap-4">
             <span className="w-10 h-px bg-primary/20"></span>
             <span className="text-[11px] font-heading font-bold uppercase tracking-[0.25em] text-primary/40">
-              — Joe Chernov
+              — {data.author}
             </span>
             <span className="w-10 h-px bg-primary/20"></span>
           </div>

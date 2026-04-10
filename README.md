@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Modern Marketing Portfolio Template
 
-## Getting Started
+A premium, high-performance marketing portfolio template built with **Next.js 15**, **Tailwind CSS**, and **Framer Motion**. Designed for creative strategists, brand managers, and digital marketers.
 
-First, run the development server:
+![Portfolio Preview](public/thumbnail.jpg)
 
+## ✨ Features
+
+- 🚀 **Next.js 15 (App Router)** - Optimized performance and SEO.
+- 🎨 **Premium Design** - Dark-themed, elegant aesthetic with smooth Framer Motion animations.
+- 📱 **Fully Responsive** - Looks beautiful on all devices.
+- ☁️ **Contentful Integration** - Headless CMS Support (Optional).
+- ⚙️ **Local Config Fallback** - Run locally without any CMS configuration.
+- 📈 **SEO Optimized** - Automatic metadata generation and social previews.
+- ⌨️ **Developer Friendly** - Clean code with TypeScript and standardized configuration.
+
+## 🚀 Getting Started
+
+### 1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/modern-marketing-portfolio.git
+cd modern-marketing-portfolio
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Configure (Optional)
+This template works out-of-the-box using the local configuration files. To customize your info, edit:
+- `src/config/site.ts` (Site metadata, social links)
+- `src/config/portfolio.ts` (Hero, About, Projects, Experience, etc.)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Run development server
+```bash
+npm run dev
+```
 
-## Learn More
+## ☁️ Contentful Setup (Optional)
 
-To learn more about Next.js, take a look at the following resources:
+If you want to manage your content via Contentful:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Create a Contentful account.
+2. Set up a Space and create the necessary Content Types (see below).
+3. Copy `.env.local.example` to `.env.local`.
+4. Fill in your `CONTENTFUL_SPACE_ID` and `CONTENTFUL_ACCESS_TOKEN`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Required Content Types:
+- `siteConfig`: Site-wide metadata.
+- `heroSection`: Hero landing data.
+- `aboutSection`: Bio and skills.
+- `project`: Individual portfolio projects.
+- `experience`: Professional timeline items.
+- `marqueeItem`: Scrolling banner text.
+- `motto`: Quote section.
 
-## Deploy on Vercel
+## 🛠 Tech Stack
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **Framework**: [Next.js 15](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **CMS**: [Contentful](https://www.contentful.com/) (Optional)
+- **Deployment**: [Vercel](https://vercel.com/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.

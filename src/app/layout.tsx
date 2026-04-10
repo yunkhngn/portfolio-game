@@ -17,29 +17,26 @@ const inter = Inter({
 export async function generateMetadata(): Promise<Metadata> {
   const config = await getSiteConfig();
 
-  const title = config?.title || "Gia Huy — Marketing Portfolio";
+  const title = config?.title || "Modern Portfolio Template";
   const description =
     config?.tagline ||
-    "Game Marketing, Livestream Production & Outdoor Activations — Creative Strategist based in Vietnam.";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://giahuy.dev";
+    "A premium marketing portfolio template built with Next.js and Tailwind CSS.";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://example.com";
   const ogImage = `${siteUrl}/thumbnail.jpg`;
 
   return {
     title,
     description,
     keywords: [
-      "Gia Huy",
+      config?.name || "Portfolio",
       "marketing portfolio",
-      "game marketing",
-      "livestream production",
-      "outdoor activation",
       "creative strategist",
-      "brand marketing",
-      "campaign management",
-      "Vietnam marketer",
+      "integrated marketing",
+      "digital strategy",
+      "portfolio template",
     ],
-    authors: [{ name: "Gia Huy" }],
-    creator: "Gia Huy",
+    authors: [{ name: config?.name || "Portfolio Author" }],
+    creator: config?.name || "Portfolio Author",
     metadataBase: new URL(siteUrl),
     robots: {
       index: true,
@@ -56,13 +53,13 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       url: siteUrl,
-      siteName: "Gia Huy Portfolio",
+      siteName: `${config?.name || "Author"} Portfolio`,
       images: [
         {
           url: ogImage,
           width: 1200,
           height: 630,
-          alt: "Gia Huy — Marketing Portfolio",
+          alt: title,
         },
       ],
       locale: "en_US",
@@ -73,7 +70,6 @@ export async function generateMetadata(): Promise<Metadata> {
       title,
       description,
       images: [ogImage],
-      creator: "@giahuy",
     },
   };
 }
